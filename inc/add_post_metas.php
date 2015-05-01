@@ -23,9 +23,7 @@ function projectprefix_entitypluralid_post_metas_boxes($boxes) {
 
 add_filter('wputh_post_metas_fields', 'projectprefix_entitypluralid_post_metas_fields', 10, 3);
 function projectprefix_entitypluralid_post_metas_fields($fields) {
-    $fields['entityidentity_info'] = array(
-        'box' => 'entityidentity_details',
-        'name' => 'Info'
-    );
+
+    #wputentitycreatorpostfields
     return $fields;
 }

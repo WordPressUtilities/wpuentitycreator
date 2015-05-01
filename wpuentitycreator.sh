@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.2';
+echo '#### v 0.3';
 echo '####';
 echo '';
 
@@ -82,9 +82,36 @@ fi;
 ## Add post metas
 ###################################
 
-read -p "Add post metas ? (Y/n) " prevent_single;
-if [[ $prevent_single != 'n' ]]; then
+read -p "Add post metas ? (Y/n) " add_post_metas;
+if [[ $add_post_metas != 'n' ]]; then
     cat "${SOURCEDIR}inc/add_post_metas.php" >> "${mainfile}";
+    while :
+    do
+        read -p "- Meta id: " field_id;
+        if [[ $field_id == '' ]]; then
+            field_id='test';
+        fi;
+        read -p "- Meta type: " field_type;
+        if [[ $field_type == '' ]]; then
+            field_type='text';
+        fi;
+        field_content="\$fields['${field_id}']=array('box'=>'entityidentity_details','name'=>'${field_id}','type'=>'${field_type}');#wputentitycreatorpostfields";
+        sed -i '' "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
+        read -p "Add another meta field ? (y/N) " field_new;
+        if [[ $field_new != 'y' ]]; then
+            break;
+        fi;
+    done
+    sed -i '' "s/#wputentitycreatorpostfields//g" "${mainfile}";
+fi;
+
+###################################
+## Add thumbnails
+###################################
+
+read -p "Add thumbnails ? (Y/n) " add_thumbnails;
+if [[ $add_thumbnails != 'n' ]]; then
+    cat "${SOURCEDIR}inc/add_thumbnails.php" >> "${mainfile}";
 fi;
 
 ###################################
