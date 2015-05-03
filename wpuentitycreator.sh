@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.3';
+echo '#### v 0.3.1';
 echo '####';
 echo '';
 
@@ -12,34 +12,33 @@ echo '';
 
 MAINDIR="${PWD}/";
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
-EXECDIR="$( cd "${SOURCEDIR}" && pwd )/";
 
 ###################################
 ## Get config
 ###################################
 
-read -p "What's the project prefix ? " project_prefix;
+read -p "What's the project prefix ? (Default:'project') " project_prefix;
 if [[ $project_prefix == '' ]]; then
     project_prefix="project";
 fi;
-read -p "What's the entity singular id ? " entity_id;
+read -p "What's the entity singular id ? (Default:'entity') " entity_id;
 if [[ $entity_id == '' ]]; then
     entity_id="entity";
 fi;
-read -p "What's the entity plural id ? " entity_pluralid;
+read -p "What's the entity plural id ? (Default:'${entity_id}s') " entity_pluralid;
 if [[ $entity_pluralid == '' ]]; then
     entity_pluralid="${entity_id}s";
 fi;
-read -p "What's the entity singular name ? " entity_name;
+read -p "What's the entity singular name ? (Default:'${entity_id}') " entity_name;
 if [[ $entity_name == '' ]]; then
     entity_name="${entity_id}";
 fi;
-read -p "What's the entity plural ? " entity_plural;
+read -p "What's the entity plural ? (Default:'${entity_name}s') " entity_plural;
 if [[ $entity_plural == '' ]]; then
     entity_plural="${entity_name}s";
 fi;
 
-mainfile="${maindir}${project_prefix}_${entity_pluralid}.php";
+mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
 
 ###################################
 ## Create file
@@ -87,11 +86,15 @@ if [[ $add_post_metas != 'n' ]]; then
     cat "${SOURCEDIR}inc/add_post_metas.php" >> "${mainfile}";
     while :
     do
-        read -p "- Meta id: " field_id;
+        read -p "- Meta id (Default:'test'): " field_id;
         if [[ $field_id == '' ]]; then
             field_id='test';
         fi;
-        read -p "- Meta type: " field_type;
+        read -p "- Meta name (Default:'${field_id}'): " field_name;
+        if [[ $field_name == '' ]]; then
+            field_name=$field_id;
+        fi;
+        read -p "- Meta type (Default:'text'): " field_type;
         if [[ $field_type == '' ]]; then
             field_type='text';
         fi;
