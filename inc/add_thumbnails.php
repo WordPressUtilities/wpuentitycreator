@@ -14,7 +14,7 @@ function projectprefix_entitypluralid_thumbnails_sizes($sizes) {
         'crop' => true,
 
         // String (not required : Default to ID)
-        'name' => 'Test',
+        'name' => 'entitynameentity thumb',
 
         // Array (not required : Default to array('any'))
         'post_type' => array(
