@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.3.1';
+echo '#### v 0.3.2';
 echo '####';
 echo '';
 
@@ -98,7 +98,7 @@ if [[ $add_post_metas != 'n' ]]; then
         if [[ $field_type == '' ]]; then
             field_type='text';
         fi;
-        field_content="\$fields['${field_id}']=array('box'=>'entityidentity_details','name'=>'${field_id}','type'=>'${field_type}');#wputentitycreatorpostfields";
+        field_content="\$fields['entityidentity_${field_id}']=array('box'=>'entityidentity_details','name'=>'${field_id}','type'=>'${field_type}');#wputentitycreatorpostfields";
         sed -i '' "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
         read -p "Add another meta field ? (y/N) " field_new;
         if [[ $field_new != 'y' ]]; then
