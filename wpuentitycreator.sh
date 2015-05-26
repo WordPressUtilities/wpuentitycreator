@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.3.4';
+echo '#### v 0.3.5';
 echo '####';
 echo '';
 
@@ -31,7 +31,8 @@ if [[ $entity_pluralid == '' ]]; then
 fi;
 read -p "What's the entity singular name ? (Default:'${entity_id}') " entity_name;
 if [[ $entity_name == '' ]]; then
-    entity_name="${entity_id}";
+    a=`echo ${entity_id} | cut -c1 | tr [:lower:] [:upper:]`;
+    entity_name=`echo ${entity_id} | sed "s/./$a/"`;
 fi;
 read -p "What's the entity plural ? (Default:'${entity_name}s') " entity_plural;
 if [[ $entity_plural == '' ]]; then
