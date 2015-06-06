@@ -18,7 +18,7 @@ function projectprefix_entitypluralid_thumbnails_sizes($sizes) {
 
         // Array (not required : Default to array('any'))
         'post_type' => array(
-            'entitynameentity'
+            'entitypluralid'
         ) ,
 
         // Boolean (not required : Default to true)
