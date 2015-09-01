@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.3.6';
+echo '#### v 0.4';
 echo '####';
 echo '';
 
@@ -21,6 +21,8 @@ read -p "What's the project prefix ? (Default:'project') " project_prefix;
 if [[ $project_prefix == '' ]]; then
     project_prefix="project";
 fi;
+
+# Entity ID
 read -p "What's the entity singular id ? (Default:'entity') " entity_id;
 if [[ $entity_id == '' ]]; then
     entity_id="entity";
@@ -29,10 +31,13 @@ read -p "What's the entity plural id ? (Default:'${entity_id}s') " entity_plural
 if [[ $entity_pluralid == '' ]]; then
     entity_pluralid="${entity_id}s";
 fi;
-read -p "What's the entity singular name ? (Default:'${entity_id}') " entity_name;
+
+# Entity name
+a=`echo ${entity_id} | cut -c1 | tr [:lower:] [:upper:]`;
+default_entity_name=`echo ${entity_id} | sed "s/./$a/"`;
+read -p "What's the entity singular name ? (Default:'${default_entity_name}') " entity_name;
 if [[ $entity_name == '' ]]; then
-    a=`echo ${entity_id} | cut -c1 | tr [:lower:] [:upper:]`;
-    entity_name=`echo ${entity_id} | sed "s/./$a/"`;
+    entity_name="${default_entity_name}";
 fi;
 read -p "What's the entity plural ? (Default:'${entity_name}s') " entity_plural;
 if [[ $entity_plural == '' ]]; then
@@ -119,10 +124,13 @@ if [[ $add_thumbnails != 'n' ]]; then
 fi;
 
 ###################################
-## Delete false PHP openings
+## Add a widget
 ###################################
 
-sed -i '' 's/\<\?php \/\* \*\///g' "${mainfile}";
+read -p "Add a widget ? (Y/n) " add_widget;
+if [[ $add_widget != 'n' ]]; then
+    cat "${SOURCEDIR}inc/add_widget.php" >> "${mainfile}";
+fi;
 
 ###################################
 ## Replace site values
@@ -133,3 +141,17 @@ sed -i '' "s/entityidentity/${entity_id}/g" "${mainfile}";
 sed -i '' "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
 sed -i '' "s/entitynameentity/${entity_name}/g" "${mainfile}";
 sed -i '' "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
+
+###################################
+## Delete false PHP openings
+###################################
+
+sed -i '' 's/\<\?php \/\* \*\///g' "${mainfile}";
+
+###################################
+## Clean up multiple line breaks
+###################################
+
+mv "${mainfile}" "${mainfile}tmp";
+sed -e '/./b' -e :n -e 'N;s/\n$//;tn' "${mainfile}tmp" > "${mainfile}";
+rm "${mainfile}tmp";
