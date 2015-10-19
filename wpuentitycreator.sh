@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.4';
+echo '#### v 0.5';
 echo '####';
 echo '';
 
@@ -71,7 +71,12 @@ cat "${SOURCEDIR}inc/register_post_type.php" >> "${mainfile}";
 
 read -p "Prevent single page ? (y/N) " prevent_single;
 if [[ $prevent_single == 'y' ]]; then
-    cat "${SOURCEDIR}inc/prevent_single.php" >> "${mainfile}";
+    read -p "Prevent archive page ? (y/N) " prevent_archive;
+    if [[ $prevent_archive == 'y' ]]; then
+        cat "${SOURCEDIR}inc/prevent_single_archive.php" >> "${mainfile}";
+    else
+        cat "${SOURCEDIR}inc/prevent_single.php" >> "${mainfile}";
+    fi;
 fi;
 
 ###################################
@@ -92,6 +97,7 @@ if [[ $add_post_metas != 'n' ]]; then
     cat "${SOURCEDIR}inc/add_post_metas.php" >> "${mainfile}";
     while :
     do
+        default_field_type='text';
         read -p "- Meta id (Default:'test'): " field_id;
         if [[ $field_id == '' ]]; then
             field_id='test';
@@ -100,9 +106,24 @@ if [[ $add_post_metas != 'n' ]]; then
         if [[ $field_name == '' ]]; then
             field_name=$field_id;
         fi;
-        read -p "- Meta type (Default:'text'): " field_type;
+
+
+        # Try to detect various fields default types
+        fields_delim="url:url;link:url;post:post;date:date;color:color;is_:select";
+        IFS=';' list=($fields_delim)
+        for item in "${list[@]}"; do
+            str_contain=${item%\:*}
+            str_type=${item#*\:}
+
+            if [[ ${field_id} == *"${str_contain}"* ]]; then
+                default_field_type="${str_type}";
+            fi;
+        done
+
+
+        read -p "- Meta type (Default:'${default_field_type}'): " field_type;
         if [[ $field_type == '' ]]; then
-            field_type='text';
+            field_type="${default_field_type}";
         fi;
         field_content="\$fields['entityidentity_${field_id}']=array('box'=>'entityidentity_details','name'=>'${field_name}','type'=>'${field_type}');#wputentitycreatorpostfields";
         sed -i '' "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
