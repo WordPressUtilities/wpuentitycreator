@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.5';
+echo '#### v 0.6';
 echo '####';
 echo '';
 
@@ -64,6 +64,15 @@ Description: Handle entity ${entity_name}
 ###################################
 
 cat "${SOURCEDIR}inc/register_post_type.php" >> "${mainfile}";
+
+###################################
+## Register taxonomy
+###################################
+
+read -p "Add taxonomy ${entity_plural}-type ? (y/N) " register_taxonomy;
+if [[ $register_taxonomy == 'y' ]]; then
+    cat "${SOURCEDIR}inc/register_taxonomy.php" >> "${mainfile}";
+fi;
 
 ###################################
 ## Prevent single
