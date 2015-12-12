@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.6';
+echo '#### v 0.7';
 echo '####';
 echo '';
 
@@ -72,6 +72,10 @@ cat "${SOURCEDIR}inc/register_post_type.php" >> "${mainfile}";
 read -p "Add taxonomy ${entity_plural}-type ? (y/N) " register_taxonomy;
 if [[ $register_taxonomy == 'y' ]]; then
     cat "${SOURCEDIR}inc/register_taxonomy.php" >> "${mainfile}";
+    read -p "Add taxonomy metas ? (y/N) " add_taxometas;
+    if [[ $add_taxometas == 'y' ]]; then
+        cat "${SOURCEDIR}inc/add_taxometas.php" >> "${mainfile}";
+    fi;
 fi;
 
 ###################################

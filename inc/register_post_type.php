@@ -4,8 +4,8 @@
   Register post type
 ---------------------------------------------------------- */
 
-add_filter('wputh_get_posttypes', 'projectprefix_entitypluralid_set_theme_posttypes');
-function projectprefix_entitypluralid_set_theme_posttypes($post_types) {
+add_filter('wputh_get_posttypes', 'projectprefix_entitypluralid_set_posttypes');
+function projectprefix_entitypluralid_set_posttypes($post_types) {
     $post_types['entitypluralid'] = array(
         'menu_icon' => 'dashicons-portfolio',
         'name' => __('entitynameentity', 'wputh') ,
