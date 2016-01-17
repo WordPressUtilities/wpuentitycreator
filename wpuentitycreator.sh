@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.7';
+echo '#### v 0.7.1';
 echo '####';
 echo '';
 
@@ -69,7 +69,7 @@ cat "${SOURCEDIR}inc/register_post_type.php" >> "${mainfile}";
 ## Register taxonomy
 ###################################
 
-read -p "Add taxonomy ${entity_plural}-type ? (y/N) " register_taxonomy;
+read -p "Add taxonomy ${entity_pluralid}-type ? (y/N) " register_taxonomy;
 if [[ $register_taxonomy == 'y' ]]; then
     cat "${SOURCEDIR}inc/register_taxonomy.php" >> "${mainfile}";
     read -p "Add taxonomy metas ? (y/N) " add_taxometas;
@@ -138,7 +138,7 @@ if [[ $add_post_metas != 'n' ]]; then
         if [[ $field_type == '' ]]; then
             field_type="${default_field_type}";
         fi;
-        field_content="\$fields['entityidentity_${field_id}']=array('box'=>'entityidentity_details','name'=>'${field_name}','type'=>'${field_type}');#wputentitycreatorpostfields";
+        field_content="\$fields['entityidentity_${field_id}']=array('box'=>'entityidentity_details','name'=>__('${field_name}', '${projectprefix}'),'type'=>'${field_type}');#wputentitycreatorpostfields";
         sed -i '' "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
         read -p "Add another meta field ? (y/N) " field_new;
         if [[ $field_new != 'y' ]]; then
@@ -152,8 +152,8 @@ fi;
 ## Add thumbnails
 ###################################
 
-read -p "Add thumbnails ? (Y/n) " add_thumbnails;
-if [[ $add_thumbnails != 'n' ]]; then
+read -p "Add custom thumbnail sizes ? (y/N) " add_thumbnails;
+if [[ $add_thumbnails == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_thumbnails.php" >> "${mainfile}";
 fi;
 
@@ -161,8 +161,8 @@ fi;
 ## Add a widget
 ###################################
 
-read -p "Add a widget ? (Y/n) " add_widget;
-if [[ $add_widget != 'n' ]]; then
+read -p "Add a widget ? (y/N) " add_widget;
+if [[ $add_widget == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_widget.php" >> "${mainfile}";
 fi;
 

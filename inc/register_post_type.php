@@ -8,8 +8,8 @@ add_filter('wputh_get_posttypes', 'projectprefix_entitypluralid_set_posttypes');
 function projectprefix_entitypluralid_set_posttypes($post_types) {
     $post_types['entitypluralid'] = array(
         'menu_icon' => 'dashicons-portfolio',
-        'name' => __('entitynameentity', 'wputh') ,
-        'plural' => __('entitypluralentity', 'wputh') ,
+        'name' => __('entitynameentity', 'projectprefix') ,
+        'plural' => __('entitypluralentity', 'projectprefix') ,
         'female' => 0,
         'supports' => array(
             'title',

@@ -22,7 +22,7 @@ class projectprefix_entitypluralid extends WP_Widget {
     }
     function widget($args, $instance) {
         echo $args['before_widget'];
-        echo $args['before_title'] . __('entitynameentity', 'wputh') . $args['after_title'];
+        echo $args['before_title'] . __('entitynameentity', 'projectprefix') . $args['after_title'];
 
         /* Content */
         echo $args['after_widget'];
