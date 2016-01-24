@@ -14,178 +14,35 @@ MAINDIR="${PWD}/";
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 
 ###################################
-## Get config
+## Entity type
 ###################################
 
-read -p "What's the project prefix ? (Default:'project') " project_prefix;
-if [[ $project_prefix == '' ]]; then
-    project_prefix="project";
+entity_typename='page';
+read -p "Is this entity a [p]age or a [c]ustom post type ? (p/C) " entity_type;
+if [[ $entity_type != 'p' ]]; then
+    entity_typename='entity';
+    entity_type='c';
 fi;
 
-# Entity ID
-read -p "What's the entity singular id ? (Default:'entity') " entity_id;
-if [[ $entity_id == '' ]]; then
-    entity_id="entity";
-fi;
-read -p "What's the entity plural id ? (Default:'${entity_id}s') " entity_pluralid;
-if [[ $entity_pluralid == '' ]]; then
-    entity_pluralid="${entity_id}s";
-fi;
+. "${SOURCEDIR}bin/config.sh";
+. "${SOURCEDIR}bin/create_file.sh";
 
-# Entity name
-a=`echo ${entity_id} | cut -c1 | tr [:lower:] [:upper:]`;
-default_entity_name=`echo ${entity_id} | sed "s/./$a/"`;
-read -p "What's the entity singular name ? (Default:'${default_entity_name}') " entity_name;
-if [[ $entity_name == '' ]]; then
-    entity_name="${default_entity_name}";
-fi;
-read -p "What's the entity plural ? (Default:'${entity_name}s') " entity_plural;
-if [[ $entity_plural == '' ]]; then
-    entity_plural="${entity_name}s";
+# Custom post type
+if [[ $entity_type == 'c' ]]; then
+    . "${SOURCEDIR}bin/register_post_type.sh";
+    . "${SOURCEDIR}bin/add_taxometas.sh";
+    . "${SOURCEDIR}bin/prevent_single.sh";
+    . "${SOURCEDIR}bin/add_options.sh";
+    . "${SOURCEDIR}bin/add_post_metas.sh";
+    . "${SOURCEDIR}bin/add_thumbnails.sh";
+    . "${SOURCEDIR}bin/add_widget.sh";
 fi;
 
-mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
-
-###################################
-## Create file
-###################################
-
-touch "${mainfile}";
-
-echo "<?php
-
-/*
-Plugin Name: [${project_prefix}] ${entity_plural}
-Description: Handle entity ${entity_name}
-*/" > "${mainfile}";
-
-###################################
-## Register post type
-###################################
-
-cat "${SOURCEDIR}inc/register_post_type.php" >> "${mainfile}";
-
-###################################
-## Register taxonomy
-###################################
-
-read -p "Add taxonomy ${entity_pluralid}-type ? (y/N) " register_taxonomy;
-if [[ $register_taxonomy == 'y' ]]; then
-    cat "${SOURCEDIR}inc/register_taxonomy.php" >> "${mainfile}";
-    read -p "Add taxonomy metas ? (y/N) " add_taxometas;
-    if [[ $add_taxometas == 'y' ]]; then
-        cat "${SOURCEDIR}inc/add_taxometas.php" >> "${mainfile}";
-    fi;
+# Page
+if [[ $entity_type == 'p' ]]; then
+    . "${SOURCEDIR}bin/add_page.sh";
+    . "${SOURCEDIR}bin/hide_page.sh";
+    . "${SOURCEDIR}bin/add_post_metas.sh";
 fi;
 
-###################################
-## Prevent single
-###################################
-
-read -p "Prevent single page ? (y/N) " prevent_single;
-if [[ $prevent_single == 'y' ]]; then
-    read -p "Prevent archive page ? (y/N) " prevent_archive;
-    if [[ $prevent_archive == 'y' ]]; then
-        cat "${SOURCEDIR}inc/prevent_single_archive.php" >> "${mainfile}";
-    else
-        cat "${SOURCEDIR}inc/prevent_single.php" >> "${mainfile}";
-    fi;
-fi;
-
-###################################
-## Add options
-###################################
-
-read -p "Add options ? (y/N) " add_options;
-if [[ $add_options == 'y' ]]; then
-    cat "${SOURCEDIR}inc/add_options.php" >> "${mainfile}";
-fi;
-
-###################################
-## Add post metas
-###################################
-
-read -p "Add post metas ? (Y/n) " add_post_metas;
-if [[ $add_post_metas != 'n' ]]; then
-    cat "${SOURCEDIR}inc/add_post_metas.php" >> "${mainfile}";
-    while :
-    do
-        default_field_type='text';
-        read -p "- Meta id (Default:'test'): " field_id;
-        if [[ $field_id == '' ]]; then
-            field_id='test';
-        fi;
-        read -p "- Meta name (Default:'${field_id}'): " field_name;
-        if [[ $field_name == '' ]]; then
-            field_name=$field_id;
-        fi;
-
-
-        # Try to detect various fields default types
-        fields_delim="url:url;link:url;post:post;date:date;color:color;is_:select";
-        IFS=';' list=($fields_delim)
-        for item in "${list[@]}"; do
-            str_contain=${item%\:*}
-            str_type=${item#*\:}
-
-            if [[ ${field_id} == *"${str_contain}"* ]]; then
-                default_field_type="${str_type}";
-            fi;
-        done
-
-
-        read -p "- Meta type (Default:'${default_field_type}'): " field_type;
-        if [[ $field_type == '' ]]; then
-            field_type="${default_field_type}";
-        fi;
-        field_content="\$fields['entityidentity_${field_id}']=array('box'=>'entityidentity_details','name'=>__('${field_name}', '${projectprefix}'),'type'=>'${field_type}');#wputentitycreatorpostfields";
-        sed -i '' "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
-        read -p "Add another meta field ? (y/N) " field_new;
-        if [[ $field_new != 'y' ]]; then
-            break;
-        fi;
-    done
-    sed -i '' "s/#wputentitycreatorpostfields//g" "${mainfile}";
-fi;
-
-###################################
-## Add thumbnails
-###################################
-
-read -p "Add custom thumbnail sizes ? (y/N) " add_thumbnails;
-if [[ $add_thumbnails == 'y' ]]; then
-    cat "${SOURCEDIR}inc/add_thumbnails.php" >> "${mainfile}";
-fi;
-
-###################################
-## Add a widget
-###################################
-
-read -p "Add a widget ? (y/N) " add_widget;
-if [[ $add_widget == 'y' ]]; then
-    cat "${SOURCEDIR}inc/add_widget.php" >> "${mainfile}";
-fi;
-
-###################################
-## Replace site values
-###################################
-
-sed -i '' "s/projectprefix/${project_prefix}/g" "${mainfile}";
-sed -i '' "s/entityidentity/${entity_id}/g" "${mainfile}";
-sed -i '' "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
-sed -i '' "s/entitynameentity/${entity_name}/g" "${mainfile}";
-sed -i '' "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
-
-###################################
-## Delete false PHP openings
-###################################
-
-sed -i '' 's/\<\?php \/\* \*\///g' "${mainfile}";
-
-###################################
-## Clean up multiple line breaks
-###################################
-
-mv "${mainfile}" "${mainfile}tmp";
-sed -e '/./b' -e :n -e 'N;s/\n$//;tn' "${mainfile}tmp" > "${mainfile}";
-rm "${mainfile}tmp";
+. "${SOURCEDIR}bin/clean.sh";
