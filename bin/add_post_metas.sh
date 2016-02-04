@@ -23,7 +23,7 @@ if [[ $add_post_metas != 'n' ]]; then
 
 
         # Try to detect various fields default types
-        fields_delim="url:url;link:url;post:post;date:date;color:color;is_:select";
+        fields_delim="url:url;link:url;post:post;date:date;color:color;image:attachment;illu:attachment;img:attachment;is_:select";
         IFS=';' list=($fields_delim)
         for item in "${list[@]}"; do
             str_contain=${item%\:*}
