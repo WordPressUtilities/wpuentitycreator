@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Extract prefix
-for f in $(ls *.php 2>/dev/null); do
+use_tmp_prefix='y';
+for f in $(ls *_*.php 2>/dev/null); do
     tmp_prefix=$(echo "${f}" | tr '_' '\n' | head -1);
     read -p "Use '${tmp_prefix}' as the project prefix [Y/n] : " use_tmp_prefix;
     if [[ $use_tmp_prefix != 'n' ]]; then
@@ -14,7 +15,7 @@ done;
 ## Get config
 ###################################
 
-if [[ $project_prefix == '' ]]; then
+if [[ $use_tmp_prefix == 'n' ]]; then
     read -p "What's the project prefix ? (Default:'project') " project_prefix;
     if [[ $project_prefix == '' ]]; then
         project_prefix="project";

@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.9';
+echo '#### v 0.10';
 echo '####';
 echo '';
 
