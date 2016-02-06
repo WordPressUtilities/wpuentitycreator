@@ -34,11 +34,10 @@ if [[ $entity_type == 'c' ]]; then
     if [[ $entity_pluralid == '' ]]; then
         entity_pluralid="${entity_id}s";
     fi;
-    mainfile="${MAINDIR}${project_prefix}_${entity_id}.php";
 else
     entity_pluralid="page${entity_id}";
-    mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
 fi;
+mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
 
 
 # Entity name
@@ -51,7 +50,7 @@ fi;
 
 # Entity plural
 if [[ $entity_type == 'c' ]]; then
-    read -p "What's the entity plural ? (Default:'${entity_name}s') " entity_plural;
+    read -p "What's the entity plural name ? (Default:'${entity_name}s') " entity_plural;
     if [[ $entity_plural == '' ]]; then
         entity_plural="${entity_name}s";
     fi;

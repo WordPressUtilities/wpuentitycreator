@@ -1,5 +1,4 @@
 <?php
-/* Template Name: entitynameentity */
 get_header();
 the_post();
 ?>

@@ -11,9 +11,7 @@ sed -i '' "s/entityidentityup/${entity_id_up}/g" "${mainfile}";
 sed -i '' "s/entityidentity/${entity_id}/g" "${mainfile}";
 sed -i '' "s/entitynameentity/${entity_name}/g" "${mainfile}";
 sed -i '' "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
-if [[ $entity_type == 'c' ]]; then
-    sed -i '' "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
-fi;
+sed -i '' "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
 
 ###################################
 ## Delete false PHP openings
@@ -34,3 +32,12 @@ sed -i '' 's/\/\*newline\*\//\'$'\n/g' "${mainfile}";
 mv "${mainfile}" "${mainfile}tmp";
 sed -e '/./b' -e :n -e 'N;s/\n$//;tn' "${mainfile}tmp" > "${mainfile}";
 rm "${mainfile}tmp";
+
+###################################
+## Flush cache
+###################################
+
+if [ "$(type -t wp)" = "file" ]; then
+    wp rewrite flush;
+    wp cache flush;
+fi
