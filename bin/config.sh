@@ -30,9 +30,17 @@ fi;
 
 # Entity plural ID
 if [[ $entity_type == 'c' ]]; then
-    read -p "What's the entity plural id ? (Default:'${entity_id}s') " entity_pluralid;
+    default_entity="${entity_id}s";
+    last_entity_char=$(echo "${entity_id: -1}");
+    if [[ $last_entity_char == 'y' ]]; then
+        default_entity="${entity_id%?}ies";
+    fi;
+    if [[ $last_entity_char == 's' ]]; then
+        default_entity="${entity_id}";
+    fi;
+    read -p "What's the entity plural id ? (Default:'${default_entity}') " entity_pluralid;
     if [[ $entity_pluralid == '' ]]; then
-        entity_pluralid="${entity_id}s";
+        entity_pluralid="${default_entity}";
     fi;
 else
     entity_pluralid="page${entity_id}";
@@ -50,9 +58,19 @@ fi;
 
 # Entity plural
 if [[ $entity_type == 'c' ]]; then
-    read -p "What's the entity plural name ? (Default:'${entity_name}s') " entity_plural;
+
+    default_entity_name="${entity_name}s";
+    last_entity_char=$(echo "${entity_name: -1}");
+    if [[ $last_entity_char == 'y' ]]; then
+        default_entity_name="${entity_name%?}ies";
+    fi;
+    if [[ $last_entity_char == 's' ]]; then
+        default_entity_name="${entity_name}";
+    fi;
+
+    read -p "What's the entity plural name ? (Default:'${default_entity_name}') " entity_plural;
     if [[ $entity_plural == '' ]]; then
-        entity_plural="${entity_name}s";
+        entity_plural="${default_entity_name}";
     fi;
 else
     entity_plural="Page ${entity_name}";
