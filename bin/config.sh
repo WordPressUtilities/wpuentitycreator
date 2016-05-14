@@ -1,9 +1,12 @@
 #!/bin/bash
 
 # Extract prefix
-use_tmp_prefix='y';
+use_tmp_prefix='n';
 for f in $(ls *_*.php 2>/dev/null); do
     tmp_prefix=$(echo "${f}" | tr '_' '\n' | head -1);
+    if [[ $tmp_prefix == '' ]]; then
+        continue;
+    fi;
     read -p "Use '${tmp_prefix}' as the project prefix [Y/n] : " use_tmp_prefix;
     if [[ $use_tmp_prefix != 'n' ]]; then
         project_prefix="${tmp_prefix}";
