@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.12.1';
+echo '#### v 0.12.2';
 echo '####';
 echo '';
 
@@ -24,6 +24,7 @@ if [[ $entity_type != 'p' ]]; then
     entity_type='c';
 fi;
 
+. "${SOURCEDIR}bin/functions.sh";
 . "${SOURCEDIR}bin/config.sh";
 . "${SOURCEDIR}bin/create_file.sh";
 

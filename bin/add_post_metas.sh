@@ -42,11 +42,11 @@ if [[ $add_post_metas != 'n' ]]; then
         f_tab="    ";
         f_nl="\/\*newline\*\/";
         field_content="${f_tab}\$fields['entityidentity_${field_id}'] = array(${f_nl}${f_tab}${f_tab}'box' => 'entityidentity_details',${f_nl}${f_tab}${f_tab}'name' => __('${field_name}', '${project_prefix}'),${f_nl}${f_tab}${f_tab}'type' => '${field_type}'${f_nl}${f_tab});${f_nl}#wputentitycreatorpostfields";
-        sed -i '' "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
+        wpuentitycreator_sed "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
         read -p "Add another meta field ? (y/N) " field_new;
         if [[ $field_new != 'y' ]]; then
             break;
         fi;
     done
-    sed -i '' "s/#wputentitycreatorpostfields//g" "${mainfile}";
+    wpuentitycreator_sed "s/#wputentitycreatorpostfields//g" "${mainfile}";
 fi;

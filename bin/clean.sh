@@ -6,24 +6,24 @@
 
 entity_id_up=`echo ${entity_id} | tr [:lower:] [:upper:]`;
 
-sed -i '' "s/projectprefix/${project_prefix}/g" "${mainfile}";
-sed -i '' "s/entityidentityup/${entity_id_up}/g" "${mainfile}";
-sed -i '' "s/entityidentity/${entity_id}/g" "${mainfile}";
-sed -i '' "s/entitynameentity/${entity_name}/g" "${mainfile}";
-sed -i '' "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
-sed -i '' "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
+wpuentitycreator_sed "s/projectprefix/${project_prefix}/g" "${mainfile}";
+wpuentitycreator_sed "s/entityidentityup/${entity_id_up}/g" "${mainfile}";
+wpuentitycreator_sed "s/entityidentity/${entity_id}/g" "${mainfile}";
+wpuentitycreator_sed "s/entitynameentity/${entity_name}/g" "${mainfile}";
+wpuentitycreator_sed "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
+wpuentitycreator_sed "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
 
 ###################################
 ## Delete false PHP openings
 ###################################
 
-sed -i '' 's/\<\?php \/\* \*\///g' "${mainfile}";
+wpuentitycreator_sed 's/\<\?php \/\* \*\///g' "${mainfile}";
 
 ###################################
 ## Add newlines where needed
 ###################################
 
-sed -i '' 's/\/\*newline\*\//\'$'\n/g' "${mainfile}";
+wpuentitycreator_sed 's/\/\*newline\*\//\'$'\n/g' "${mainfile}";
 
 ###################################
 ## Clean up multiple line breaks
