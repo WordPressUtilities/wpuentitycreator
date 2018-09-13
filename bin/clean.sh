@@ -18,6 +18,7 @@ wpuentitycreator_sed "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
 ###################################
 
 wpuentitycreator_sed 's/\<\?php \/\* \*\///g' "${mainfile}";
+wpuentitycreator_sed 's/<?php \/\* \*\///g' "${mainfile}";
 
 ###################################
 ## Add newlines where needed
