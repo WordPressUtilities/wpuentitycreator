@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.12.4';
+echo '#### v 0.13.0';
 echo '####';
 echo '';
 
@@ -34,6 +34,7 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_taxometas.sh";
     . "${SOURCEDIR}bin/prevent_single.sh";
     . "${SOURCEDIR}bin/create_entity.sh";
+    . "${SOURCEDIR}bin/add_strates_posttype.sh";
     . "${SOURCEDIR}bin/add_options.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
     . "${SOURCEDIR}bin/add_thumbnails.sh";
@@ -46,6 +47,7 @@ if [[ $entity_type == 'p' ]]; then
     . "${SOURCEDIR}bin/create_page.sh";
     . "${SOURCEDIR}bin/hide_page.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
+    . "${SOURCEDIR}bin/add_strates_page.sh";
 fi;
 
 . "${SOURCEDIR}bin/clean.sh";
