@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.13.1';
+echo '#### v 0.14.0';
 echo '####';
 echo '';
 
@@ -39,6 +39,7 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_post_metas.sh";
     . "${SOURCEDIR}bin/add_thumbnails.sh";
     . "${SOURCEDIR}bin/add_widget.sh";
+    . "${SOURCEDIR}bin/add_admin_widget.sh";
 fi;
 
 # Page
