@@ -2,8 +2,9 @@
 
 # Extract prefix
 use_tmp_prefix='n';
-for f in $(ls *_*.php 2>/dev/null); do
-    tmp_prefix=$(echo "${f}" | tr '_' '\n' | head -1);
+for _file in ./*_*.php; do
+    tmp_prefix=$(echo "${_file}" | tr '_' '\n' | head -1);
+    tmp_prefix=${tmp_prefix/\.\//};
     if [[ $tmp_prefix == '' ]]; then
         continue;
     fi;
