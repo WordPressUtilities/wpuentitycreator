@@ -4,9 +4,12 @@
 ## Create page template
 ###################################
 
-theme_dir="../themes/${project_prefix}";
-page_tpl_file="${theme_dir}/page-${entity_id}.php";
 
+_wpcontentdir=$(pwd);
+wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
+theme_dir="${wpcontent_dir}/themes/${project_prefix}";
+
+page_tpl_file="${theme_dir}/page-${entity_id}.php";
 if [ -d ${theme_dir} ];then
     read -p "Create page template ? (Y/n) " create_page;
     if [[ $create_page != 'n' ]]; then
