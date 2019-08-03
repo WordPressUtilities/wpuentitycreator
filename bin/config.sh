@@ -3,8 +3,7 @@
 # Extract prefix
 use_tmp_prefix='n';
 for _file in ./*_*.php; do
-    tmp_prefix=$(echo "${_file}" | tr '_' '\n' | head -1);
-    tmp_prefix=${tmp_prefix/\.\//};
+    tmp_prefix=$(extract_prefix $_file);
     if [[ $tmp_prefix == '' ]]; then
         continue;
     fi;
@@ -31,6 +30,10 @@ read -p "What's the ${entity_typename} singular id ? (Default:'${entity_typename
 if [[ $entity_id == '' ]]; then
     entity_id="${entity_typename}";
 fi;
+
+# Clean entity ID
+entity_id=${entity_id/-/_};
+entity_id=${entity_id/ /_};
 
 # Entity plural ID
 if [[ $entity_type == 'c' ]]; then
