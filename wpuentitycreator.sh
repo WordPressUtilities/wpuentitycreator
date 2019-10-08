@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.14.3';
+echo '#### v 0.15.0';
 echo '####';
 echo '';
 
@@ -12,6 +12,15 @@ echo '';
 
 MAINDIR="${PWD}/";
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
+
+###################################
+## Check path
+###################################
+
+if [[ "${MAINDIR}" != *"mu-plugins"* ]]; then
+    echo "The script did not start in a mu-plugins directory.";
+    return 0;
+fi
 
 ###################################
 ## Entity type
