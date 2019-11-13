@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.15.1';
+echo '#### v 0.16.0';
 echo '####';
 echo '';
 
@@ -26,12 +26,21 @@ fi
 ## Entity type
 ###################################
 
-entity_typename='page';
-read -p "Is this entity a [p]age or a [c]ustom post type ? (p/C) " entity_type;
-if [[ $entity_type != 'p' ]]; then
+if [[ "${1}" == 'p' || "${1}" == 'page' ]]; then
+    entity_typename='page';
+    entity_type='p';
+elif [[ "${1}" == 'c' || "${1}" == 'custom' ]]; then
     entity_typename='entity';
     entity_type='c';
+else
+    entity_typename='page';
+    read -p "Is this entity a [p]age or a [c]ustom post type ? (p/C) " entity_type;
+    if [[ $entity_type != 'p' ]]; then
+        entity_typename='entity';
+        entity_type='c';
+    fi;
 fi;
+
 
 . "${SOURCEDIR}bin/functions.sh";
 . "${SOURCEDIR}bin/config.sh";
