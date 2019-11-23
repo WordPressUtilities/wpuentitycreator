@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.16.0';
+echo '#### v 0.17.0';
 echo '####';
 echo '';
 
@@ -52,6 +52,7 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_taxometas.sh";
     . "${SOURCEDIR}bin/prevent_single.sh";
     . "${SOURCEDIR}bin/create_entity.sh";
+    . "${SOURCEDIR}bin/save_post_posttype.sh";
     . "${SOURCEDIR}bin/add_strates_posttype.sh";
     . "${SOURCEDIR}bin/add_options.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
