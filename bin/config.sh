@@ -7,6 +7,9 @@ for _file in ./*_*.php; do
     if [[ $tmp_prefix == '' ]]; then
         continue;
     fi;
+    if [[ $tmp_prefix == '*' ]]; then
+        continue;
+    fi;
     read -p "Use '${tmp_prefix}' as the project prefix [Y/n] : " use_tmp_prefix;
     if [[ $use_tmp_prefix != 'n' ]]; then
         project_prefix="${tmp_prefix}";
