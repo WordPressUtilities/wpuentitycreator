@@ -4,8 +4,6 @@
 ## Create entity
 ###################################
 
-theme_dir="../themes/${project_prefix}";
-
 if [ -d ${theme_dir} ];then
     if [[ $prevent_single != 'y' ]]; then
         read -p "Create singular template ? (Y/n) " create_entity_singular;
