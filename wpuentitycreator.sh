@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.18.3';
+echo '#### v 0.19.0';
 echo '####';
 echo '';
 
@@ -43,21 +43,22 @@ fi;
 
 _wpcontentdir=$(pwd);
 wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
-theme_dir="${wpcontent_dir}/themes/${project_prefix}";
 
 . "${SOURCEDIR}bin/functions.sh";
 . "${SOURCEDIR}bin/config.sh";
 . "${SOURCEDIR}bin/create_file.sh";
+
+theme_dir="${wpcontent_dir}/themes/${project_prefix}";
 
 # Custom post type
 if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/register_post_type.sh";
     . "${SOURCEDIR}bin/add_taxometas.sh";
     . "${SOURCEDIR}bin/prevent_single.sh";
-    . "${SOURCEDIR}bin/create_entity.sh";
     . "${SOURCEDIR}bin/save_post_posttype.sh";
     . "${SOURCEDIR}bin/delete_post_posttype.sh";
     . "${SOURCEDIR}bin/add_strates_posttype.sh";
+    . "${SOURCEDIR}bin/create_entity.sh";
     . "${SOURCEDIR}bin/add_options.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
     . "${SOURCEDIR}bin/add_thumbnails.sh";

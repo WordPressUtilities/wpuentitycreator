@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Add';
-echo '#### v 0.18.3';
+echo '#### v 0.19.0';
 echo '####';
 echo '';
 
@@ -20,11 +20,13 @@ fi;
 
 . "${SOURCEDIR}bin/functions.sh";
 
+
 ###################################
 ## Set values
 ###################################
 
 mainfile="${1}";
+project_prefix=${mainfile%_*};
 
 # Check if post type
 _has_post_type=$(search_extract_file "\$post_types\[\'" "\'\] \= array(" "${1}")
@@ -44,13 +46,14 @@ if [[ "${_has_page}" ]];then
     entity_type='p';
     entity_pluralid="${_has_page}";
     entity_id="${_has_page}";
-    entity_name=$(search_extract_file "'post_title' => '" "''," "${mainfile}");
+    entity_name=$(search_extract_file "'post_title' => '" "'," "${mainfile}");
     entity_plural="${entity_name}";
 fi;
 
 # Page
 if [[ $entity_type == 'p' ]]; then
     . "${SOURCEDIR}bin/add_post_metas.sh";
+    . "${SOURCEDIR}bin/add_strates_page.sh";
     . "${SOURCEDIR}bin/clean.sh";
 fi;
 

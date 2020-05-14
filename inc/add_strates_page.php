@@ -8,8 +8,8 @@ add_filter('wpu_acf_flexible_content', 'projectprefix_entitypluralid_wpu_acf_fle
 function projectprefix_entitypluralid_wpu_acf_flexible_content($contents) {
     /* Page */
     $contents['entitypluralid-blocks'] = array(
-        'page_ids' => array(
-            get_option('entityidentity__page_id')
+        'page_templates' => array(
+            'page-entityidentity.php'
         ),
         'name' => 'Blocks',
         'layouts' => array(
