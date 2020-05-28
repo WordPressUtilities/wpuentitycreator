@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Add';
-echo '#### v 0.19.0';
+echo '#### v 0.19.1';
 echo '####';
 echo '';
 
@@ -18,8 +18,10 @@ if [[ ! -f "${1}" ]];then
     return 0;
 fi;
 
-. "${SOURCEDIR}bin/functions.sh";
+_wpcontentdir=$(pwd);
+wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
 
+. "${SOURCEDIR}bin/functions.sh";
 
 ###################################
 ## Set values
@@ -62,6 +64,7 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_options.sh";
     . "${SOURCEDIR}bin/add_taxometas.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
+    . "${SOURCEDIR}bin/add_fixtures.sh";
     . "${SOURCEDIR}bin/clean.sh";
 fi;
 

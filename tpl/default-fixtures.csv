@@ -1,0 +1,4 @@
+uniqid,post_type,post_status,post_title,post_content
+entitypluralid-1,entitypluralid,publish,entitynameentity 1,lorem ipsum
+entitypluralid-2,entitypluralid,publish,entitynameentity 2,lorem ipsum
+entitypluralid-3,entitypluralid,publish,entitynameentity 3,lorem ipsum
