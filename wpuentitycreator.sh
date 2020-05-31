@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.19.1';
+echo '#### v 0.19.2';
 echo '####';
 echo '';
 
@@ -73,6 +73,7 @@ if [[ $entity_type == 'p' ]]; then
     . "${SOURCEDIR}bin/create_page.sh";
     . "${SOURCEDIR}bin/hide_page.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
+    . "${SOURCEDIR}bin/add_contact_form.sh";
     . "${SOURCEDIR}bin/add_strates_page.sh";
 fi;
 
