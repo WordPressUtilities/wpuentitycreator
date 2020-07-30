@@ -4,11 +4,10 @@
   Add a contact form
 ---------------------------------------------------------- */
 
-add_filter('wpucontactforms_default_options', 'projectprefix_entitypluralid_wpucontactforms_default_options', 10, 1);
-function projectprefix_entitypluralid_wpucontactforms_default_options($options) {
+add_filter('plugins_loaded', 'projectprefix_entitypluralid_init_contact_form', 10, 1);
+function projectprefix_entitypluralid_init_contact_form($options) {
 
     $fields = array();
-
     $fields['contact_name'] = array(
         'label' => __('Name', 'wpucontactforms'),
         'required' => 1
@@ -28,12 +27,17 @@ function projectprefix_entitypluralid_wpucontactforms_default_options($options) 
         'type' => 'file'
     );
 
-    return array(
+    if(!class_exists('wpucontactforms')){
+        return;
+    }
+
+    new wpucontactforms(array(
         'id' => 'entitypluralid-form',
         'name' => '[entitynameentity] Form',
         'contact__settings' => array(
             'group_class' => 'cssc-form cssc-form--default',
             'contact_fields' => $fields
         )
-    );
+    ));
+
 }

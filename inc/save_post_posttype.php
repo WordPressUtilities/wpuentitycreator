@@ -11,6 +11,16 @@ function projectprefix_entitypluralid_save_post($post_id, $post, $update) {
         return;
     }
 
+    /* Avoid autosave */
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    /* Prevent user without rights */
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
     /* Only if not a revision */
     if (wp_is_post_revision($post_id)) {
         return;
