@@ -7,7 +7,10 @@ function wpuentitycreator_sed(){
 
 function extract_prefix(){
     tmp_prefix=$(echo "${1}" | tr '_' '\n' | head -1);
-    echo ${tmp_prefix/\.\//};
+    tmp_prefix=${tmp_prefix/\.php\//};
+    tmp_prefix=${tmp_prefix/\.\//};
+    tmp_prefix=${tmp_prefix/\*\//};
+    echo "${tmp_prefix}"
 }
 
 function search_extract_file(){

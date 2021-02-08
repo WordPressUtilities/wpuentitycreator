@@ -1,27 +1,44 @@
 #!/bin/bash
 
-# Extract prefix
-use_tmp_prefix='n';
+# Extract prefix from other files
+project_prefix='';
+tmp_prefix='';
 for _file in ./*_*.php; do
     tmp_prefix=$(extract_prefix $_file);
     if [[ $tmp_prefix == '' ]]; then
         continue;
     fi;
     if [[ $tmp_prefix == '*' ]]; then
+        tmp_prefix='';
         continue;
     fi;
+done;
+
+# Extract prefix from folder name
+if [[ "${tmp_prefix}" == '' ]];then
+    # Find most used word
+    most_used_word=($(echo "${MAINDIR}" | sed -r 's/\/+/\n/g' | sed '/^$/d' | sort | uniq -c | sort -n | tail -n1));
+    # Extract value as 2nd part of the array (ex: 2 project -> project)
+    if [[ "${most_used_word[1]}" != '' ]];then
+        tmp_prefix="${most_used_word[1]}";
+    fi;
+fi;
+
+# Use temporary prefix
+use_tmp_prefix='n';
+if [[ "${tmp_prefix}" != '' ]];then
     read -p "Use '${tmp_prefix}' as the project prefix [Y/n] : " use_tmp_prefix;
     if [[ $use_tmp_prefix != 'n' ]]; then
         project_prefix="${tmp_prefix}";
         break 1;
     fi;
-done;
+fi;
 
 ###################################
 ## Get config
 ###################################
 
-if [[ $use_tmp_prefix == 'n' ]]; then
+if [[ $project_prefix == '' ]]; then
     read -p "What's the project prefix ? (Default:'project') " project_prefix;
     if [[ $project_prefix == '' ]]; then
         project_prefix="project";
