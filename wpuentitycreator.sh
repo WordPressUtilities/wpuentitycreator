@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.21.0';
+echo '#### v 0.21.1';
 echo '####';
 echo '';
 
@@ -10,12 +10,17 @@ echo '';
 ## Config
 ###################################
 
-MAINDIR="${PWD}/";
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 
 ###################################
 ## Check path
 ###################################
+
+MAINDIR="${PWD}/";
+if [[ -d "${MAINDIR}wp-content/mu-plugins/" ]];then
+    echo '-> Going to the mu-plugins directory';
+    MAINDIR="${MAINDIR}wp-content/mu-plugins/";
+fi;
 
 if [[ "${MAINDIR}" != *"mu-plugins"* ]]; then
     echo "The script did not start in a mu-plugins directory.";
@@ -38,6 +43,20 @@ else
     if [[ $entity_type != 'p' ]]; then
         entity_typename='entity';
         entity_type='c';
+    fi;
+fi;
+
+# Creating dir
+MAINDIR_NAME=$(basename $MAINDIR);
+if [[ "${MAINDIR_NAME}" == 'mu-plugins' ]];then
+    if [[ "${entity_typename}" == 'page' ]];then
+        MAINDIR="${MAINDIR}/pages/";
+    else
+        MAINDIR="${MAINDIR}/entities/";
+    fi;
+    if [[ ! -d "${MAINDIR}" ]];then
+        echo "-> Creating a directory for this ${entity_typename}";
+        mkdir "${MAINDIR}";
     fi;
 fi;
 
