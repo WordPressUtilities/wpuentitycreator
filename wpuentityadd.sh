@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Add';
-echo '#### v 0.23.0';
+echo '#### v 0.23.1';
 echo '####';
 echo '';
 
@@ -28,11 +28,12 @@ wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
 ###################################
 
 mainfile="${1}";
-project_prefix=${mainfile%_*};
+project_prefix=$(basename "${mainfile}");
+project_prefix=${project_prefix%_*};
 
 # Check if post type
-_has_post_type=$(search_extract_file "\$post_types\[\'" "\'\] \= array(" "${1}")
-_has_page=$(search_extract_file "\$pages_site\[\'" "__page_id\'\] = array(" "${1}");
+_has_post_type=$(search_extract_file "\$post_types\[\'" "\'\] \= array(" "${mainfile}")
+_has_page=$(search_extract_file "\$pages_site\[\'" "__page_id\'\] = array(" "${mainfile}");
 
 if [[ "${_has_post_type}" ]];then
     entity_typename='entity';
