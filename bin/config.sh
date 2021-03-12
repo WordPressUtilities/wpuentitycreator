@@ -30,7 +30,6 @@ if [[ "${tmp_prefix}" != '' ]];then
     read -p "Use '${tmp_prefix}' as the project prefix [Y/n] : " use_tmp_prefix;
     if [[ $use_tmp_prefix != 'n' ]]; then
         project_prefix="${tmp_prefix}";
-        break 1;
     fi;
 fi;
 
