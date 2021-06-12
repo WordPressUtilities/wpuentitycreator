@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.25.0';
+echo '#### v 0.26.0';
 echo '####';
 echo '';
 
@@ -37,12 +37,20 @@ if [[ "${1}" == 'p' || "${1}" == 'page' ]]; then
 elif [[ "${1}" == 'c' || "${1}" == 'custom' ]]; then
     entity_typename='entity';
     entity_type='c';
+elif [[ "${1}" == 't' || "${1}" == 'taxo' || "${1}" == 'taxonomy' ]]; then
+    entity_typename='taxo';
+    entity_type='t';
 else
-    entity_typename='page';
-    read -p "Is this entity a [p]age or a [c]ustom post type ? (p/C) " entity_type;
-    if [[ $entity_type != 'p' ]]; then
-        entity_typename='entity';
-        entity_type='c';
+    read -p "Is this entity a [p]age, a [taxonomy] or a [c]ustom post type ? (p/t/C) " entity_type_choice;
+    entity_typename='entity';
+    entity_type='entity';
+    if [[ $entity_type_choice == 't' ]]; then
+        entity_typename='taxo';
+        entity_type='t';
+    fi;
+    if [[ $entity_type_choice == 'p' ]]; then
+        entity_typename='page';
+        entity_type='p';
     fi;
 fi;
 
@@ -51,6 +59,8 @@ MAINDIR_NAME=$(basename $MAINDIR);
 if [[ "${MAINDIR_NAME}" == 'mu-plugins' ]];then
     if [[ "${entity_typename}" == 'page' ]];then
         MAINDIR="${MAINDIR}/pages/";
+    elif [[ "${entity_typename}" == 'taxo' ]];then
+        MAINDIR="${MAINDIR}/taxonomies/";
     else
         MAINDIR="${MAINDIR}/entities/";
     fi;
@@ -89,6 +99,13 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_widget.sh";
     . "${SOURCEDIR}bin/add_admin_widget.sh";
 fi;
+
+
+if [[ $entity_type == 't' ]]; then
+    . "${SOURCEDIR}bin/register_taxo.sh";
+    . "${SOURCEDIR}bin/add_taxometas_tax.sh";
+fi;
+
 
 # Page
 if [[ $entity_type == 'p' ]]; then

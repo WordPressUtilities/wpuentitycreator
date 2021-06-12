@@ -55,7 +55,7 @@ entity_id=${entity_id/-/_};
 entity_id=${entity_id/ /_};
 
 # Entity plural ID
-if [[ $entity_type == 'c' ]]; then
+if [[ $entity_type == 'c' || $entity_type = 't' ]]; then
     default_entity="${entity_id}s";
     last_entity_char=$(echo "${entity_id: -1}");
     if [[ $last_entity_char == 'y' ]]; then
@@ -83,8 +83,7 @@ if [[ $entity_name == '' ]]; then
 fi;
 
 # Entity plural
-if [[ $entity_type == 'c' ]]; then
-
+if [[ $entity_type == 'c' || $entity_type = 't' ]]; then
     default_entity_name="${entity_name}s";
     last_entity_char=$(echo "${entity_name: -1}");
     if [[ $last_entity_char == 'y' ]]; then
