@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.26.0';
+echo '#### v 0.27.0';
 echo '####';
 echo '';
 
@@ -100,12 +100,12 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_admin_widget.sh";
 fi;
 
-
+# Taxonomy
 if [[ $entity_type == 't' ]]; then
     . "${SOURCEDIR}bin/register_taxo.sh";
     . "${SOURCEDIR}bin/add_taxometas_tax.sh";
+    . "${SOURCEDIR}bin/add_taxo_column.sh";
 fi;
-
 
 # Page
 if [[ $entity_type == 'p' ]]; then
