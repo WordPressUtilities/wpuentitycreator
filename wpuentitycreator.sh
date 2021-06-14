@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.27.0';
+echo '#### v 0.28.0';
 echo '####';
 echo '';
 
@@ -103,6 +103,7 @@ fi;
 # Taxonomy
 if [[ $entity_type == 't' ]]; then
     . "${SOURCEDIR}bin/register_taxo.sh";
+    . "${SOURCEDIR}bin/create_tax.sh";
     . "${SOURCEDIR}bin/add_taxometas_tax.sh";
     . "${SOURCEDIR}bin/add_taxo_column.sh";
 fi;
