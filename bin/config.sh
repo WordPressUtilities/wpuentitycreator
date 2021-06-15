@@ -101,3 +101,14 @@ else
     entity_plural="Page ${entity_name}";
 fi;
 
+
+# Post type
+tax_post_type='post';
+default_tax_post_type='post';
+if [[ $entity_type = 't' ]];then
+    tax_post_type='post';
+    read -p "What's the post type linked to this taxonomy ? (Default:'${default_tax_post_type}') " tax_post_type;
+    if [[ $tax_post_type == '' ]]; then
+        tax_post_type="${default_tax_post_type}";
+    fi;
+fi;

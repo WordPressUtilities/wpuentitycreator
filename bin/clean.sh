@@ -12,6 +12,7 @@ wpuentitycreator_sed "s/entityidentity/${entity_id}/g" "${mainfile}";
 wpuentitycreator_sed "s/entitynameentity/${entity_name}/g" "${mainfile}";
 wpuentitycreator_sed "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
 wpuentitycreator_sed "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
+wpuentitycreator_sed "s/taxposttype/${tax_post_type}/g" "${mainfile}";
 
 ###################################
 ## Delete false PHP openings

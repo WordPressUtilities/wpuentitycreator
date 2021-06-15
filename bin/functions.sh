@@ -31,4 +31,5 @@ function wpuentitycreator_replace_vars(){
     wpuentitycreator_sed "s/entityidentity/${entity_id}/g" "${1}";
     wpuentitycreator_sed "s/entitypluralid/${entity_pluralid}/g" "${1}";
     wpuentitycreator_sed "s/projectprefix/${project_prefix}/g" "${1}";
+    wpuentitycreator_sed "s/taxposttype/${tax_post_type}/g" "${1}";
 }

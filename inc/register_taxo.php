@@ -10,7 +10,7 @@ function projectprefix_entitypluralid_set_taxonomies($taxonomies) {
         'name' => __('entitynameentity', 'projectprefix'),
         'plural' => __('entitypluralentity', 'projectprefix'),
         'female' => 0,
-        'post_type' => array('post')
+        'post_type' => array('taxposttype')
     );
     return $taxonomies;
 }
