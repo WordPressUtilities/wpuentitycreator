@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.29.0';
+echo '#### v 0.30.0';
 echo '####';
 echo '';
 
@@ -41,9 +41,30 @@ elif [[ "${1}" == 't' || "${1}" == 'taxo' || "${1}" == 'taxonomy' ]]; then
     entity_typename='taxo';
     entity_type='t';
 else
-    read -p "Is this entity a [p]age, a [taxonomy] or a [c]ustom post type ? (p/t/C) " entity_type_choice;
-    entity_typename='entity';
-    entity_type='entity';
+
+    entity_current_dirname=$(basename "${MAINDIR}");
+    default_entity_type_choice='c';
+    default_entity_type_choice_string='p/t/C';
+
+    if [[ "${entity_current_dirname}" == 'page' || "${entity_current_dirname}" == 'pages' ]];then
+        default_entity_type_choice='p';
+        default_entity_type_choice_string='P/t/c';
+    fi;
+    if [[ "${entity_current_dirname}" == 'taxonomy' || "${entity_current_dirname}" == 'taxonomies' ]];then
+        default_entity_type_choice='t';
+        default_entity_type_choice_string='p/T/c';
+    fi;
+
+    read -p "Is this entity a [p]age, a [taxonomy] or a [c]ustom post type ? (${default_entity_type_choice_string}) " entity_type_choice;
+
+    if [[ "${entity_type_choice}" == '' ]];then
+        entity_type_choice="${default_entity_type_choice}";
+    fi;
+
+    if [[ $entity_type_choice == 'c' ]]; then
+        entity_typename='entity';
+        entity_type='c';
+    fi;
     if [[ $entity_type_choice == 't' ]]; then
         entity_typename='taxo';
         entity_type='t';
