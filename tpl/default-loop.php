@@ -9,5 +9,8 @@
             <h3 class="loop-entityidentity__name"><?php the_title();?></h3>
         </a>
         <?php echo wputh_get_time_tag('d/m/Y', get_the_ID()); ?>
+        <div class="loop-entityidentity__desc">
+            <?php the_excerpt(); ?>
+        </div>
     </div>
 </div><?php

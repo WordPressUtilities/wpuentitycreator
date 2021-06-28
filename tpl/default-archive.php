@@ -1,15 +1,24 @@
 <?php
 get_header();
+$wpq_entitypluralid = new WP_Query(array(
+    'posts_per_page' => -1,
+    'post_type' => 'entitypluralid'
+));
 ?>
-<div class="main-content main-content--entitypluralid">
-    <h1><?php echo __('Archive', 'projectprefix'); ?></h1>
-    <div>
+<div class="centered-container cc-main-content--entitypluralid">
+    <div class="main-content main-content--entitypluralid">
+        <h1><?php echo __('entitynameentity', 'projectprefix'); ?></h1>
         <?php
-        while (have_posts()): the_post();
+        if ($wpq_entitypluralid->have_posts()) {
             echo '<div>';
-            include get_stylesheet_directory() . '/tpl/loop-entitypluralid.php';
+            while ($wpq_entitypluralid->have_posts()) {
+                $wpq_entitypluralid->the_post();
+                echo '<div>';
+                include get_stylesheet_directory() . '/tpl/loops/loop-entitypluralid.php';
+                echo '</div>';
+            }
             echo '</div>';
-        endwhile;
+        }
         ?>
     </div>
 </div>
