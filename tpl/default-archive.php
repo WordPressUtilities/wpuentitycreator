@@ -19,6 +19,7 @@ $wpq_entitypluralid = new WP_Query(array(
             }
             echo '</div>';
         }
+        wp_reset_postdata();
         ?>
     </div>
 </div>
