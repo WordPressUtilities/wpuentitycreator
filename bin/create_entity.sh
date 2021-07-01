@@ -37,4 +37,12 @@ if [ -d ${theme_dir} ];then
         cp "${SOURCEDIR}tpl/default-loop.php" "${page_tpl_file}";
         wpuentitycreator_replace_vars "${page_tpl_file}";
     fi;
+    if [[ $register_taxonomy == 'y' ]]; then
+        read -p "Create taxo template ? (Y/n) " create_entity_taxo;
+        if [[ $create_entity_taxo != 'n' ]]; then
+            page_tpl_file="${theme_dir}/taxonomy-${entity_pluralid}-type.php";
+            cp "${SOURCEDIR}tpl/default-tax-entity.php" "${page_tpl_file}";
+            wpuentitycreator_replace_vars "${page_tpl_file}";
+        fi;
+    fi;
 fi;
