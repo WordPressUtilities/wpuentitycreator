@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.30.4';
+echo '#### v 0.31.0';
 echo '####';
 echo '';
 
@@ -44,18 +44,22 @@ else
 
     entity_current_dirname=$(basename "${MAINDIR}");
     default_entity_type_choice='c';
-    default_entity_type_choice_string='p/t/C';
+    default_entity_type_choice_string='p/t/b/C';
 
     if [[ "${entity_current_dirname}" == 'page' || "${entity_current_dirname}" == 'pages' ]];then
         default_entity_type_choice='p';
-        default_entity_type_choice_string='P/t/c';
+        default_entity_type_choice_string='P/t/b/c';
     fi;
     if [[ "${entity_current_dirname}" == 'taxonomy' || "${entity_current_dirname}" == 'taxonomies' ]];then
         default_entity_type_choice='t';
-        default_entity_type_choice_string='p/T/c';
+        default_entity_type_choice_string='p/T/b/c';
+    fi;
+    if [[ "${entity_current_dirname}" == 'block' || "${entity_current_dirname}" == 'blocks' ]];then
+        default_entity_type_choice='b';
+        default_entity_type_choice_string='p/t/B/c';
     fi;
 
-    read -p "Is this entity a [p]age, a [taxonomy] or a [c]ustom post type ? (${default_entity_type_choice_string}) " entity_type_choice;
+    read -p "Is this entity a [p]age, a [t]axonomy, a v[lock] or a [c]ustom post type ? (${default_entity_type_choice_string}) " entity_type_choice;
 
     if [[ "${entity_type_choice}" == '' ]];then
         entity_type_choice="${default_entity_type_choice}";
@@ -68,6 +72,10 @@ else
     if [[ $entity_type_choice == 't' ]]; then
         entity_typename='taxo';
         entity_type='t';
+    fi;
+    if [[ $entity_type_choice == 'b' ]]; then
+        entity_typename='block';
+        entity_type='b';
     fi;
     if [[ $entity_type_choice == 'p' ]]; then
         entity_typename='page';
@@ -127,6 +135,11 @@ if [[ $entity_type == 't' ]]; then
     . "${SOURCEDIR}bin/create_tax.sh";
     . "${SOURCEDIR}bin/add_taxometas_tax.sh";
     . "${SOURCEDIR}bin/add_taxo_column.sh";
+fi;
+
+# Block
+if [[ $entity_type == 'b' ]]; then
+    . "${SOURCEDIR}bin/add_block_type.sh";
 fi;
 
 # Page

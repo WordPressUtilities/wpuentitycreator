@@ -68,6 +68,8 @@ if [[ $entity_type == 'c' || $entity_type = 't' ]]; then
     if [[ $entity_pluralid == '' ]]; then
         entity_pluralid="${default_entity}";
     fi;
+elif [[ $entity_type == 'b' ]]; then
+    entity_pluralid="block${entity_id}";
 else
     entity_pluralid="page${entity_id}";
 fi;
@@ -97,6 +99,8 @@ if [[ $entity_type == 'c' || $entity_type = 't' ]]; then
     if [[ $entity_plural == '' ]]; then
         entity_plural="${default_entity_name}";
     fi;
+elif [[ $entity_type == 'b' ]]; then
+    entity_plural="Block ${entity_id}";
 else
     entity_plural="Page ${entity_name}";
 fi;
