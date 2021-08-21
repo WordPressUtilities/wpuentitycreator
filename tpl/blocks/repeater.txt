@@ -1,13 +1,3 @@
-<?php /* */
-
-/* ----------------------------------------------------------
-  Block entitynameentity
----------------------------------------------------------- */
-
-add_filter('projectprefix_blocks', function ($layouts) {
-    $layouts['entityidentity'] = array(
-        'label' => 'entitynameentity',
-        'sub_fields' => array(
             'entityidentity' => array(
                 'type' => 'repeater',
                 'layout' => 'block',
@@ -19,7 +9,3 @@ add_filter('projectprefix_blocks', function ($layouts) {
                     )
                 )
             )
-        )
-    );
-    return $layouts;
-}, 10, 1);

@@ -1,0 +1,6 @@
+            'title' => 'wpuacf_title',
+            'link' => 'wpuacf_cta',
+            'image' => array(
+                'label' => 'Image',
+                'type' => 'wpuacf_image'
+            )
