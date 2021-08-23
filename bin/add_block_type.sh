@@ -6,7 +6,7 @@
 
 add_block_type='';
 while [ -z $add_block_type ]; do
-    read -p "What block type do you need ? ([c]tatitle,[e]mpty,[r]epeater,c[u]stom) : " add_block_type;
+    read -p "What block type do you need ? ([c]tatitle,[e]mpty,[r]epeater,c[u]stom,co[n]ditional) : " add_block_type;
 
     if [[ "${add_block_type}" == "" ]];then
         continue
@@ -24,6 +24,10 @@ while [ -z $add_block_type ]; do
     # Type Repeater
     if [[ $add_block_type == 'r' || $add_block_type == 'repeater' ]]; then
         cat "${SOURCEDIR}tpl/blocks/repeater.txt" >> "${mainfile}";
+    fi;
+    # Type Repeater
+    if [[ $add_block_type == 'n' || $add_block_type == 'conditional' ]]; then
+        cat "${SOURCEDIR}tpl/blocks/conditional.txt" >> "${mainfile}";
     fi;
     # Type custom
     if [[ $add_block_type == 'u' || $add_block_type == 'custom' ]]; then

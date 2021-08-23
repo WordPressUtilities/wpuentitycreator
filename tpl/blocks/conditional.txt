@@ -1,0 +1,32 @@
+'type' => array(
+    'label' => 'Type',
+    'type' => 'select',
+    'choices' => array(
+        'last_posts' => 'Last posts',
+        'manual_posts' => 'Manual posts',
+    )
+),
+'posts_last' => array(
+    'label' => 'Posts',
+    'conditional_logic' => array(
+        array(
+            array(
+                'field' => 'entityidentity_layouttype',
+                'operator' => '==',
+                'value' => 'last_posts'
+            )
+        )
+    )
+),
+'posts_manual' => array(
+    'label' => 'Posts',
+    'conditional_logic' => array(
+        array(
+            array(
+                'field' => 'entityidentity_layouttype',
+                'operator' => '==',
+                'value' => 'manual_posts'
+            )
+        )
+    )
+)
