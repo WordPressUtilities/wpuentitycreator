@@ -35,13 +35,13 @@ while [ -z $add_block_type ]; do
         while [ ! -z $continue_add_block_custom_value ]; do
             add_block_custom_value_type='';
             while [ -z $add_block_custom_value_type ]; do
-                read -p "What field type ? ([t]itle,[i]mage) : " add_block_custom_value_type;
+                read -p "What field type ? ([t]itle,[i]mage,[r]epeater,co[n]ditional) : " add_block_custom_value_type;
 
                 if [[ "${add_block_custom_value_type}" == "" ]];then
                     echo '- Empty field type, ignoring this field.'
                     continue;
                 fi;
-                read -p "What is the ID of the field ? : " add_block_custom_field_id;
+                read -p "What is the ID of the field ? (ignored for repeater & conditional) : " add_block_custom_field_id;
                 if [[ "${add_block_custom_field_id}" == "" ]];then
                     echo '- Empty field ID, ignoring this field.'
                     continue;
@@ -55,6 +55,16 @@ while [ -z $add_block_type ]; do
                 # Field type image
                 if [[ "${add_block_custom_value_type}" == 'i' || "${add_block_custom_value_type}" == 'image' ]];then
                     add_block_custom_field_value="'wpuacf_image'";
+                fi;
+                # Field type repeater
+                if [[ "${add_block_custom_value_type}" == 'r' || "${add_block_custom_value_type}" == 'repeater' ]];then
+                    cat "${SOURCEDIR}tpl/blocks/repeater.txt" >> "${mainfile}";
+                    echo ','  >> "${mainfile}";
+                fi;
+                # Field group type condition
+                if [[ "${add_block_custom_value_type}" == 'n' || "${add_block_custom_value_type}" == 'conditional' ]];then
+                    cat "${SOURCEDIR}tpl/blocks/conditional.txt" >> "${mainfile}";
+                    echo ','  >> "${mainfile}";
                 fi;
 
                 if [[ "${add_block_custom_field_value}" != "" ]];then
