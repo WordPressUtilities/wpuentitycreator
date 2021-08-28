@@ -35,16 +35,17 @@ while [ -z $add_block_type ]; do
         while [ ! -z $continue_add_block_custom_value ]; do
             add_block_custom_value_type='';
             while [ -z $add_block_custom_value_type ]; do
-                read -p "What field type ? ([t]itle,[i]mage,[r]epeater,co[n]ditional) : " add_block_custom_value_type;
+                read -p "What field type ? ([t]itle,[i]mage,[v]ideo,[r]epeater,co[n]ditional) : " add_block_custom_value_type;
 
                 if [[ "${add_block_custom_value_type}" == "" ]];then
                     echo '- Empty field type, ignoring this field.'
                     continue;
                 fi;
+
                 read -p "What is the ID of the field ? (ignored for repeater & conditional) : " add_block_custom_field_id;
                 if [[ "${add_block_custom_field_id}" == "" ]];then
-                    echo '- Empty field ID, ignoring this field.'
-                    continue;
+                    echo '- Empty field ID, using field type as ID.'
+                    add_block_custom_field_id="${add_block_custom_value_type}";
                 fi;
                 add_block_custom_field_value="";
 
@@ -55,6 +56,10 @@ while [ -z $add_block_type ]; do
                 # Field type image
                 if [[ "${add_block_custom_value_type}" == 'i' || "${add_block_custom_value_type}" == 'image' ]];then
                     add_block_custom_field_value="'wpuacf_image'";
+                fi;
+                # Field type video
+                if [[ "${add_block_custom_value_type}" == 'v' || "${add_block_custom_value_type}" == 'video' ]];then
+                    add_block_custom_field_value="'wpuacf_video'";
                 fi;
                 # Field type repeater
                 if [[ "${add_block_custom_value_type}" == 'r' || "${add_block_custom_value_type}" == 'repeater' ]];then
