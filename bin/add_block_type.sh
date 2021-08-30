@@ -33,45 +33,55 @@ while [ -z $add_block_type ]; do
     if [[ $add_block_type == 'u' || $add_block_type == 'custom' ]]; then
         continue_add_block_custom_value='1';
         while [ ! -z $continue_add_block_custom_value ]; do
-            add_block_custom_value_type='';
-            while [ -z $add_block_custom_value_type ]; do
-                read -p "What field type ? ([t]itle,[i]mage,[v]ideo,[r]epeater,co[n]ditional) : " add_block_custom_value_type;
-
-                if [[ "${add_block_custom_value_type}" == "" ]];then
+            _f_type='';
+            while [ -z $_f_type ]; do
+                read -p "What field type ? ([t]itle,[i]mage,[r]epeater,co[n]ditional,true[f]alse) : " _f_type;
+                if [[ "${_f_type}" == "" ]];then
                     echo '- Empty field type, ignoring this field.'
                     continue;
                 fi;
 
-                read -p "What is the ID of the field ? (ignored for repeater & conditional) : " add_block_custom_field_id;
-                if [[ "${add_block_custom_field_id}" == "" ]];then
-                    echo '- Empty field ID, using field type as ID.'
-                    add_block_custom_field_id="${add_block_custom_value_type}";
+                if [[ "${_f_type}" != 'r' &&  "${_f_type}" != 'repeater' &&  "${_f_type}" != 'n' &&  "${_f_type}" != 'conditional' ]];then
+                    read -p "What is the ID of the field ? : " add_block_custom_field_id;
+                    if [[ "${add_block_custom_field_id}" == "" ]];then
+                        echo '- Empty field ID, using field type as ID.'
+                        add_block_custom_field_id="${_f_type}";
+                    fi;
                 fi;
+
                 add_block_custom_field_value="";
 
                 # Field type title
-                if [[ "${add_block_custom_value_type}" == 't' || "${add_block_custom_value_type}" == 'title' ]];then
+                if [[ "${_f_type}" == 't' || "${_f_type}" == 'title' ]];then
                     add_block_custom_field_value="'wpuacf_title'";
                 fi;
+
                 # Field type image
-                if [[ "${add_block_custom_value_type}" == 'i' || "${add_block_custom_value_type}" == 'image' ]];then
+                if [[ "${_f_type}" == 'i' || "${_f_type}" == 'image' ]];then
                     add_block_custom_field_value="'wpuacf_image'";
                 fi;
+
                 # Field type video
-                if [[ "${add_block_custom_value_type}" == 'v' || "${add_block_custom_value_type}" == 'video' ]];then
+                if [[ "${_f_type}" == 'v' || "${_f_type}" == 'video' ]];then
                     add_block_custom_field_value="'wpuacf_video'";
                 fi;
-                # Field type repeater
-                if [[ "${add_block_custom_value_type}" == 'r' || "${add_block_custom_value_type}" == 'repeater' ]];then
-                    cat "${SOURCEDIR}tpl/blocks/repeater.txt" >> "${mainfile}";
-                    echo ','  >> "${mainfile}";
-                fi;
-                # Field group type condition
-                if [[ "${add_block_custom_value_type}" == 'n' || "${add_block_custom_value_type}" == 'conditional' ]];then
-                    cat "${SOURCEDIR}tpl/blocks/conditional.txt" >> "${mainfile}";
-                    echo ','  >> "${mainfile}";
+
+                # Field type true false
+                if [[ "${_f_type}" == 'f' || "${_f_type}" == 'truefalse' ]];then
+                    add_block_custom_field_value="array('label' => '${add_block_custom_field_id}','type' => 'true_false', 'ui' => 1)";
                 fi;
 
+                # Field type repeater
+                if [[ "${_f_type}" == 'r' || "${_f_type}" == 'repeater' ]];then
+                    cat "${SOURCEDIR}tpl/blocks/repeater.txt" >> "${mainfile}";
+                fi;
+
+                # Field group type condition
+                if [[ "${_f_type}" == 'n' || "${_f_type}" == 'conditional' ]];then
+                    cat "${SOURCEDIR}tpl/blocks/conditional.txt" >> "${mainfile}";
+                fi;
+
+                # Insert field value
                 if [[ "${add_block_custom_field_value}" != "" ]];then
                     _indent_3="            ";
                     echo "${_indent_3}'${add_block_custom_field_id}' => ${add_block_custom_field_value}," >> "${mainfile}";

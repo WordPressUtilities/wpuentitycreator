@@ -3,4 +3,4 @@
             'image' => array(
                 'label' => 'Image',
                 'type' => 'wpuacf_image'
-            )
+            ),
