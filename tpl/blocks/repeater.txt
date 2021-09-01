@@ -1,5 +1,6 @@
             'entityidentity' => array(
                 'type' => 'repeater',
+                'label' => 'entitynameentity',
                 'layout' => 'block',
                 'sub_fields' => array(
                     'title' => 'wpuacf_title',

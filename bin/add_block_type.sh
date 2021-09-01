@@ -35,7 +35,7 @@ while [ -z $add_block_type ]; do
         while [ ! -z $continue_add_block_custom_value ]; do
             _f_type='';
             while [ -z $_f_type ]; do
-                read -p "What field type ? ([t]itle,[i]mage,[r]epeater,co[n]ditional,true[f]alse) : " _f_type;
+                read -p "What field type ? ([t]itle,[i]mage,[c]ta,[v]ideo,[r]epeater,co[n]ditional,true[f]alse) : " _f_type;
                 if [[ "${_f_type}" == "" ]];then
                     echo '- Empty field type, ignoring this field.'
                     continue;
@@ -54,6 +54,11 @@ while [ -z $add_block_type ]; do
                 # Field type title
                 if [[ "${_f_type}" == 't' || "${_f_type}" == 'title' ]];then
                     add_block_custom_field_value="'wpuacf_title'";
+                fi;
+
+                # Field type cta
+                if [[ "${_f_type}" == 'c' || "${_f_type}" == 'cta' ]];then
+                    add_block_custom_field_value="'wpuacf_cta'";
                 fi;
 
                 # Field type image

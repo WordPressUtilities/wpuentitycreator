@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.33.0';
+echo '#### v 0.33.1';
 echo '####';
 echo '';
 
@@ -140,6 +140,7 @@ fi;
 # Block
 if [[ $entity_type == 'b' ]]; then
     . "${SOURCEDIR}bin/add_block_type.sh";
+    . "${SOURCEDIR}bin/add_options.sh";
 fi;
 
 # Page
