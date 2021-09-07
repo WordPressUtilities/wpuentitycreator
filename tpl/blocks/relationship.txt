@@ -1,0 +1,6 @@
+            'entityidentity' => array(
+                'required' => 1,
+                'label' => 'entitynameentity',
+                'type' => 'relationship',
+                'post_type' => 'post'
+            )

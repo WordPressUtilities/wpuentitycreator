@@ -6,7 +6,7 @@
 
 add_block_type='';
 while [ -z $add_block_type ]; do
-    read -p "What block type do you need ? ([c]tatitle,[e]mpty,[r]epeater,c[u]stom,co[n]ditional) : " add_block_type;
+    read -p "What block type do you need ? ([c]tatitle,[e]mpty,[r]epeater,c[u]stom,co[n]ditional,relationshi[p]) : " add_block_type;
 
     if [[ "${add_block_type}" == "" ]];then
         continue
@@ -25,9 +25,13 @@ while [ -z $add_block_type ]; do
     if [[ $add_block_type == 'r' || $add_block_type == 'repeater' ]]; then
         cat "${SOURCEDIR}tpl/blocks/repeater.txt" >> "${mainfile}";
     fi;
-    # Type Repeater
+    # Type Conditional
     if [[ $add_block_type == 'n' || $add_block_type == 'conditional' ]]; then
         cat "${SOURCEDIR}tpl/blocks/conditional.txt" >> "${mainfile}";
+    fi;
+    # Type Relationship
+    if [[ $add_block_type == 'p' || $add_block_type == 'relationship' ]]; then
+        cat "${SOURCEDIR}tpl/blocks/relationship.txt" >> "${mainfile}";
     fi;
     # Type custom
     if [[ $add_block_type == 'u' || $add_block_type == 'custom' ]]; then
@@ -35,13 +39,13 @@ while [ -z $add_block_type ]; do
         while [ ! -z $continue_add_block_custom_value ]; do
             _f_type='';
             while [ -z $_f_type ]; do
-                read -p "What field type ? ([t]itle,[i]mage,[c]ta,[v]ideo,[r]epeater,co[n]ditional,true[f]alse) : " _f_type;
+                read -p "What field type ? ([t]itle,[i]mage,[c]ta,[v]ideo,[r]epeater,co[n]ditional,true[f]alse,relationshi[p]) : " _f_type;
                 if [[ "${_f_type}" == "" ]];then
                     echo '- Empty field type, ignoring this field.'
                     continue;
                 fi;
 
-                if [[ "${_f_type}" != 'r' &&  "${_f_type}" != 'repeater' &&  "${_f_type}" != 'n' &&  "${_f_type}" != 'conditional' ]];then
+                if [[ "${_f_type}" != 'r' && "${_f_type}" != 'repeater' && "${_f_type}" != 'n' && "${_f_type}" != 'conditional' && "${_f_type}" != 'p' && "${_f_type}" != 'relationship' ]];then
                     read -p "What is the ID of the field ? : " add_block_custom_field_id;
                     if [[ "${add_block_custom_field_id}" == "" ]];then
                         echo '- Empty field ID, using field type as ID.'
@@ -81,9 +85,14 @@ while [ -z $add_block_type ]; do
                     cat "${SOURCEDIR}tpl/blocks/repeater.txt" >> "${mainfile}";
                 fi;
 
-                # Field group type condition
+                # Field group type conditional
                 if [[ "${_f_type}" == 'n' || "${_f_type}" == 'conditional' ]];then
                     cat "${SOURCEDIR}tpl/blocks/conditional.txt" >> "${mainfile}";
+                fi;
+
+                # Field group type relationship
+                if [[ "${_f_type}" == 'n' || "${_f_type}" == 'relationship' ]];then
+                    cat "${SOURCEDIR}tpl/blocks/relationship.txt" >> "${mainfile}";
                 fi;
 
                 # Insert field value
