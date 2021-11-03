@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.33.2';
+echo '#### v 0.33.3';
 echo '####';
 echo '';
 
@@ -135,6 +135,7 @@ if [[ $entity_type == 't' ]]; then
     . "${SOURCEDIR}bin/create_tax.sh";
     . "${SOURCEDIR}bin/add_taxometas_tax.sh";
     . "${SOURCEDIR}bin/add_taxo_column.sh";
+    . "${SOURCEDIR}bin/add_wpuseo_taxo.sh";
 fi;
 
 # Block
