@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.34.0';
+echo '#### v 0.34.1';
 echo '####';
 echo '';
 
@@ -59,7 +59,7 @@ else
         default_entity_type_choice_string='p/t/B/c';
     fi;
 
-    read -p "Is this entity a [p]age, a [t]axonomy, a v[lock] or a [c]ustom post type ? (${default_entity_type_choice_string}) " entity_type_choice;
+    read -p "Is this entity a [p]age, a [t]axonomy, a [b]lock, a [c]ustom post type or an [e]mpty file ? (${default_entity_type_choice_string}) " entity_type_choice;
 
     if [[ "${entity_type_choice}" == '' ]];then
         entity_type_choice="${default_entity_type_choice}";
@@ -81,15 +81,21 @@ else
         entity_typename='page';
         entity_type='p';
     fi;
+    if [[ $entity_type_choice == 'e' ]]; then
+        entity_typename='empty';
+        entity_type='e';
+    fi;
 fi;
 
 # Creating dir
 MAINDIR_NAME=$(basename $MAINDIR);
-if [[ "${MAINDIR_NAME}" == 'mu-plugins' ]];then
+if [[ "${entity_typename}" != "empty" && "${MAINDIR_NAME}" == 'mu-plugins' ]];then
     if [[ "${entity_typename}" == 'page' ]];then
         MAINDIR="${MAINDIR}/pages/";
     elif [[ "${entity_typename}" == 'taxo' ]];then
         MAINDIR="${MAINDIR}/taxonomies/";
+    elif [[ "${entity_typename}" == 'block' ]];then
+        MAINDIR="${MAINDIR}/blocks/";
     else
         MAINDIR="${MAINDIR}/entities/";
     fi;
