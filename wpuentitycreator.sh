@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.34.1';
+echo '#### v 0.34.2';
 echo '####';
 echo '';
 
@@ -44,19 +44,19 @@ else
 
     entity_current_dirname=$(basename "${MAINDIR}");
     default_entity_type_choice='c';
-    default_entity_type_choice_string='p/t/b/C';
+    default_entity_type_choice_string='p/t/b/C/e';
 
     if [[ "${entity_current_dirname}" == 'page' || "${entity_current_dirname}" == 'pages' ]];then
         default_entity_type_choice='p';
-        default_entity_type_choice_string='P/t/b/c';
+        default_entity_type_choice_string='P/t/b/c/e';
     fi;
     if [[ "${entity_current_dirname}" == 'taxonomy' || "${entity_current_dirname}" == 'taxonomies' ]];then
         default_entity_type_choice='t';
-        default_entity_type_choice_string='p/T/b/c';
+        default_entity_type_choice_string='p/T/b/c/e';
     fi;
     if [[ "${entity_current_dirname}" == 'block' || "${entity_current_dirname}" == 'blocks' ]];then
         default_entity_type_choice='b';
-        default_entity_type_choice_string='p/t/B/c';
+        default_entity_type_choice_string='p/t/B/c/e';
     fi;
 
     read -p "Is this entity a [p]age, a [t]axonomy, a [b]lock, a [c]ustom post type or an [e]mpty file ? (${default_entity_type_choice_string}) " entity_type_choice;

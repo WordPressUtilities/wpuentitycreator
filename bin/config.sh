@@ -70,6 +70,8 @@ if [[ $entity_type == 'c' || $entity_type = 't' ]]; then
     fi;
 elif [[ $entity_type == 'b' ]]; then
     entity_pluralid="block${entity_id}";
+elif [[ $entity_type == 'e' ]]; then
+    entity_pluralid="${entity_id}";
 else
     entity_pluralid="page${entity_id}";
 fi;
