@@ -17,10 +17,7 @@ if [ -d ${theme_dir} ];then
             wpuentitycreator_sed "s/the_content()/the_content();do_action('wpucontactforms_content', false, 'entitypluralid-form')/g" "${page_tpl_file}";
         fi;
 
-        wpuentitycreator_sed "s/entityidentity/${entity_id}/g" "${page_tpl_file}";
-        wpuentitycreator_sed "s/entitynameentity/${entity_name}/g" "${page_tpl_file}";
-        wpuentitycreator_sed "s/entityidentity/${entity_id}/g" "${page_tpl_file}";
-        wpuentitycreator_sed "s/entitypluralid/${entity_pluralid}/g" "${page_tpl_file}";
+        wpuentitycreator_replace_vars "${page_tpl_file}";
     fi;
 fi;
 

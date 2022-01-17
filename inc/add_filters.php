@@ -21,7 +21,7 @@ function projectprefix_entitypluralid_livesearch_get_datas() {
         $out = ob_get_clean();
 
         /* Filter : type */
-        $t_types = get_the_terms($id, 'entitypluralid-type');
+        $t_types = get_the_terms(get_the_ID(), 'entitypluralid-type');
         $types = array();
         foreach ($t_types as $type) {
             $types[] = $type->slug;
@@ -45,7 +45,7 @@ function projectprefix_entitypluralid_livesearch_get_filters() {
         'input_type' => 'radio',
         'taxonomy' => 'entitypluralid-type',
         'label' => 'Type',
-        'view_all_label' => __('View all', 'vitality'),
+        'view_all_label' => __('View all', 'projectprefix'),
         'hide_empty' => true,
         'has_view_all' => true,
         'value_field' => 'slug'

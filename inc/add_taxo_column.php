@@ -5,13 +5,13 @@
 ---------------------------------------------------------- */
 
 add_filter('manage_edit-entitypluralid_columns', function ($columns) {
-    $columns['entitypluralid_cover'] = 'Image';
+    $columns['entitypluralid_image'] = 'Image';
     return $columns;
 });
 
-add_filter('manage_entitypluralid_custom_column', function ($content, $column_name, $term_id) {
-    if ($column_name == 'entitypluralid_cover') {
-        echo '<img src="https://via.placehold.com/100x100" alt="" />';
+add_action('manage_entitypluralid_custom_column', function ($content, $column_name, $term_id) {
+    if ($column_name != 'entitypluralid_image') {
+        return;
     }
-    return $content;
+    echo '<img src="https://via.placeholder.com/100x100" alt="" />';
 }, 99, 3);
