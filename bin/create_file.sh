@@ -6,7 +6,7 @@
 
 touch "${mainfile}";
 
-if [[ "${entity_typename}" == 'empty' ]];then
+if [[ "${entity_typename}" == 'empty' || "${entity_typename}" == 'block' ]];then
     echo "<?php
 /*
 Plugin Name: [${project_prefix}] ${entity_name}
