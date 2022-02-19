@@ -33,6 +33,10 @@ while [ -z $add_block_type ]; do
     if [[ $add_block_type == 'p' || $add_block_type == 'relationship' ]]; then
         cat "${SOURCEDIR}tpl/blocks/relationship.txt" >> "${mainfile}";
     fi;
+    # Type empty
+    if [[ $add_block_type == 'e' || $add_block_type == 'empty' ]]; then
+        cat "${SOURCEDIR}tpl/blocks/empty.txt" >> "${mainfile}";
+    fi;
     # Type custom
     if [[ $add_block_type == 'u' || $add_block_type == 'custom' ]]; then
         continue_add_block_custom_value='1';

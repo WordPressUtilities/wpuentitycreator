@@ -1,0 +1,7 @@
+            'message' => array(
+                'label' => 'Message',
+                'type' => 'acfe_dynamic_render',
+                'render' => function ($field) {
+                    echo '<p>Click on “apply” to preview this block.</p>';
+                }
+            )
