@@ -43,16 +43,14 @@ if [[ $project_prefix == '' ]]; then
         project_prefix="project";
     fi;
 fi;
+project_prefix=$(bashutilities_string_to_slug "${project_prefix}");
 
 # Entity ID
 read -p "What's the ${entity_typename} singular id ? (Default:'${entity_typename}') " entity_id;
 if [[ $entity_id == '' ]]; then
     entity_id="${entity_typename}";
 fi;
-
-# Clean entity ID
-entity_id=${entity_id/-/_};
-entity_id=${entity_id/ /_};
+entity_id=$(bashutilities_string_to_slug "${entity_id}");
 
 # Entity plural ID
 if [[ $entity_type == 'c' || $entity_type = 't' ]]; then
@@ -75,6 +73,7 @@ elif [[ $entity_type == 'e' ]]; then
 else
     entity_pluralid="page${entity_id}";
 fi;
+entity_pluralid=$(bashutilities_string_to_slug "${entity_pluralid}");
 mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
 
 
@@ -118,3 +117,4 @@ if [[ $entity_type = 't' ]];then
         tax_post_type="${default_tax_post_type}";
     fi;
 fi;
+tax_post_type=$(bashutilities_string_to_slug "${tax_post_type}");

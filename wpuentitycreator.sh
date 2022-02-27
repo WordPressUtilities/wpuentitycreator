@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.35.0';
+echo '#### v 0.36.0';
 echo '####';
 echo '';
 
@@ -11,6 +11,7 @@ echo '';
 ###################################
 
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
+_SOURCEDIR_BASHUTILITIES="${SOURCEDIR}tools/BashUtilities/"
 
 ###################################
 ## Check path
@@ -108,6 +109,13 @@ fi;
 _wpcontentdir=$(pwd);
 wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
 
+
+. "${_SOURCEDIR_BASHUTILITIES}/modules/files.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/messages.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/texttransform.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/values.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/git.sh";
+
 . "${SOURCEDIR}bin/functions.sh";
 . "${SOURCEDIR}bin/config.sh";
 . "${SOURCEDIR}bin/create_file.sh";
@@ -163,3 +171,4 @@ if [[ $entity_type == 'p' ]]; then
 fi;
 
 . "${SOURCEDIR}bin/clean.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/stop.sh";
