@@ -17,7 +17,7 @@ done;
 # Extract prefix from folder name
 if [[ "${tmp_prefix}" == '' ]];then
     # Find most used word
-    most_used_word=($(echo "${MAINDIR}" | sed -r 's/\/+/\n/g' | sed '/^$/d' | sort | uniq -c | sort -n | tail -n1));
+    most_used_word=($(echo "${MAINDIR//htdocs\/}" | sed -r 's/\/+/\n/g' | sed '/^$/d' | sort | uniq -c | sort -n | tail -n1));
     # Extract value as 2nd part of the array (ex: 2 project -> project)
     if [[ "${most_used_word[1]}" != '' ]];then
         tmp_prefix="${most_used_word[1]}";
