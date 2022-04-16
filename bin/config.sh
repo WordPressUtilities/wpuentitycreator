@@ -80,6 +80,8 @@ mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
 # Entity name
 a=`echo ${entity_id} | cut -c1 | tr [:lower:] [:upper:]`;
 default_entity_name=`echo ${entity_id} | sed "s/./$a/"`;
+default_entity_name="${default_entity_name//_/ }";
+default_entity_name="${default_entity_name//-/ }";
 read -p "What's the ${entity_typename} singular name ? (Default:'${default_entity_name}') " entity_name;
 if [[ $entity_name == '' ]]; then
     entity_name="${default_entity_name}";
