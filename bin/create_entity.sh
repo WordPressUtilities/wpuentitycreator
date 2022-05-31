@@ -13,6 +13,9 @@ if [ -d ${theme_dir} ];then
             if [[ $add_strates == 'y' ]]; then
                 wpuentitycreator_sed "s/the_content()/echo get_wpu_acf_flexible_content('entitypluralid-blocks')/g" "${page_tpl_file}";
             fi;
+            if [[ $add_to_blocks == 'y' ]]; then
+                cat "${SOURCEDIR}tpl/default-master.php" > "${page_tpl_file}";
+            fi;
             wpuentitycreator_replace_vars "${page_tpl_file}";
         fi;
     fi;

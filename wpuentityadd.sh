@@ -70,6 +70,7 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/add_pll.sh";
     . "${SOURCEDIR}bin/add_to_blocks.sh";
     . "${SOURCEDIR}bin/add_filters.sh";
+    . "${SOURCEDIR}bin/add_archive_acf_fields.sh";
     . "${SOURCEDIR}bin/add_admin_columns.sh";
     . "${SOURCEDIR}bin/add_fixtures.sh";
     . "${SOURCEDIR}bin/clean.sh";

@@ -7,7 +7,7 @@ $wpq_entitypluralid = new WP_Query(array(
 ?>
 <div class="centered-container cc-main-content--entitypluralid">
     <div class="main-content main-content--entitypluralid">
-        <h1><?php echo __('entitynameentity', 'projectprefix'); ?></h1>
+        <h1><?php echo __('entitypluralname', 'projectprefix'); ?></h1>
         <?php
         if ($wpq_entitypluralid->have_posts()) {
             echo '<div>';

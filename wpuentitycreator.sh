@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.37.0';
+echo '#### v 0.38.0';
 echo '####';
 echo '';
 
@@ -130,15 +130,16 @@ if [[ $entity_type == 'c' ]]; then
     . "${SOURCEDIR}bin/save_post_posttype.sh";
     . "${SOURCEDIR}bin/delete_post_posttype.sh";
     . "${SOURCEDIR}bin/add_strates_posttype.sh";
-    . "${SOURCEDIR}bin/create_entity.sh";
     . "${SOURCEDIR}bin/add_fixtures.sh";
+    . "${SOURCEDIR}bin/add_to_blocks.sh";
+    . "${SOURCEDIR}bin/create_entity.sh";
     . "${SOURCEDIR}bin/add_options.sh";
     . "${SOURCEDIR}bin/add_post_metas.sh";
     . "${SOURCEDIR}bin/add_meta_box.sh";
     . "${SOURCEDIR}bin/add_wpuseo.sh";
     . "${SOURCEDIR}bin/add_pll.sh";
-    . "${SOURCEDIR}bin/add_to_blocks.sh";
     . "${SOURCEDIR}bin/add_filters.sh";
+    . "${SOURCEDIR}bin/add_archive_acf_fields.sh";
     . "${SOURCEDIR}bin/add_admin_columns.sh";
     . "${SOURCEDIR}bin/add_thumbnails.sh";
     . "${SOURCEDIR}bin/add_widget.sh";
