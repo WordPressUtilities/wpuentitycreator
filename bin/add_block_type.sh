@@ -71,7 +71,7 @@ while [ -z $add_block_type ]; do
 
                 # Field type image
                 if [[ "${_f_type}" == 'i' || "${_f_type}" == 'image' ]];then
-                    add_block_custom_field_value="'wpuacf_image'";
+                    add_block_custom_field_value="array('type' => 'wpuacf_image', 'min_width' => 600, 'min_height' => 400)";
                 fi;
 
                 # Field type video
