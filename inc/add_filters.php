@@ -68,13 +68,11 @@ $datas = projectprefix_entitypluralid_livesearch_get_datas();
 $filters = projectprefix_entitypluralid_livesearch_get_filters();
 $templates = projectprefix_entitypluralid_livesearch_get_templates();
 get_header();
-?>
-<div class="centered-container cc-main-content--entitypluralid">
-    <div class="main-content main-content--entitypluralid">
-        <h1><?php echo __('entitynameentity', 'projectprefix'); ?></h1>
-        <?php do_action('wpulivesearch_form', $datas, $filters, $templates);?>
-    </div>
-</div>
-<?php
+echo '<div class="centered-container cc-main-content--entitypluralid">';
+echo '<div class="main-content main-content--entitypluralid">';
+echo '<h1>' . __('entitynameentity', 'projectprefix') . '</h1>';
+do_action('wpulivesearch_form', $datas, $filters, $templates);
+echo '</div>';
+echo '</div>';
 get_footer();
 */

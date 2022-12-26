@@ -4,6 +4,32 @@
 ## Add a block type
 ###################################
 
+## Block Model
+###################################
+
+# Ask type
+_block_model_name=$(bashutilities_get_user_var "Is it a block model? Type the ID here to specify it" '');
+if [[ "${_block_model_name}" != '' ]];then
+    cat "${SOURCEDIR}tpl/blocks/0-header.txt" >> "${mainfile}";
+    cat "${SOURCEDIR}tpl/blocks/0-wpuacfmodel.txt" >> "${mainfile}";
+
+    _block_custom_classname=$(bashutilities_get_yn "Do you need a custom classname ?" 'y');
+    if [[ "${_block_custom_classname}" == 'y' ]];then
+        cat "${SOURCEDIR}tpl/blocks/0-wpuacfmodel-classname.txt" >> "${mainfile}";
+    fi;
+
+    _block_custom_override_fields=$(bashutilities_get_yn "Do you need to override fields ?" 'n');
+    if [[ "${_block_custom_override_fields}" == 'y' ]];then
+        cat "${SOURCEDIR}tpl/blocks/0-wpuacfmodel-overridefields.txt" >> "${mainfile}";
+    fi;
+
+    wpuentitycreator_sed "s/wpuacfmodelid/${_block_model_name}/g" "${mainfile}";
+    return;
+fi;
+
+## Default type
+###################################
+
 add_block_type='';
 while [ -z $add_block_type ]; do
     read -p "What block type do you need ? ([c]tatitle,[e]mpty,[r]epeater,c[u]stom,co[n]ditional,relationshi[p]) : " add_block_type;

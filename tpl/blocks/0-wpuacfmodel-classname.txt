@@ -1,0 +1,9 @@
+
+/* Add a classname */
+add_filter('get_wpu_acf_wrapper_classname', function ($classes, $block_type) {
+    if ($block_type == 'wpuacfmodelid') {
+        $classes[] = 'centered-container--thin';
+        $classes[] = 'section-m';
+    }
+    return $classes;
+}, 10, 2);

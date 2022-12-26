@@ -1,0 +1,8 @@
+
+add_filter('projectprefix_blocks', function ($layouts) {
+    $layouts['entityidentity'] = array(
+        'label' => 'entitynameentity',
+        'wpuacf_model' => 'wpuacfmodelid'
+    );
+    return $layouts;
+}, 10, 1);

@@ -1,0 +1,8 @@
+
+/* Override fields */
+add_filter('wpu_acf_flexible__override_model', function ($model, $layout_id) {
+    if ($layout_id == 'wpuacfmodelid') {
+        $model['sub_fields']['col_reset'] = 'wpuacf_100p';
+    }
+    return $model;
+}, 10, 2);
