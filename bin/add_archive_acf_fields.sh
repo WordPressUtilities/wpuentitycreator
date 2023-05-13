@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ "${_has_acf_flex}" != '1' ]];then
+    return 0;
+fi;
+
 ###################################
 ## Add ACF fields on archive
 ###################################

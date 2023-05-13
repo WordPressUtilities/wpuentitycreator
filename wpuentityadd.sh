@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Add';
-echo '#### v 0.39.0';
+echo '#### v 0.39.1';
 echo '####';
 echo '';
 
@@ -22,6 +22,7 @@ _wpcontentdir=$(pwd);
 wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
 
 . "${SOURCEDIR}bin/functions.sh";
+. "${SOURCEDIR}bin/detect.sh";
 
 ###################################
 ## Set values

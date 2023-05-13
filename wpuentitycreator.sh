@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.39.0';
+echo '#### v 0.39.1';
 echo '####';
 echo '';
 
@@ -119,6 +119,7 @@ wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
 . "${SOURCEDIR}bin/functions.sh";
 . "${SOURCEDIR}bin/config.sh";
 . "${SOURCEDIR}bin/create_file.sh";
+. "${SOURCEDIR}bin/detect.sh";
 
 theme_dir="${wpcontent_dir}/themes/${project_prefix}";
 
