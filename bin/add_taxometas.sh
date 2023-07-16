@@ -11,4 +11,8 @@ if [[ $register_taxonomy == 'y' ]]; then
     if [[ $add_taxometas == 'y' ]]; then
         cat "${SOURCEDIR}inc/add_taxometas.php" >> "${mainfile}";
     fi;
+    read -p "Add taxonomy to breadcrumbs for this post type ? (y/N) " add_taxo_breadcrumbs_post_type;
+    if [[ $add_taxo_breadcrumbs_post_type == 'y' ]]; then
+        cat "${SOURCEDIR}inc/add_taxo_breadcrumbs_post_type.php" >> "${mainfile}";
+    fi;
 fi;
