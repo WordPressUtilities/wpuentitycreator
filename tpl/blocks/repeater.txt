@@ -1,4 +1,6 @@
             'entityidentity' => array(
+                'required' => true,
+                'min' => 1,
                 'type' => 'repeater',
                 'label' => 'entitynameentity',
                 'layout' => 'block',

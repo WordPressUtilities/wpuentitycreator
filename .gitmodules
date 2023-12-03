@@ -1,3 +1,6 @@
 [submodule "tools/BashUtilities"]
 	path = tools/BashUtilities
 	url = https://github.com/Darklg/BashUtilities.git
+[submodule "tools/wpu_acf_flexible"]
+	path = tools/wpu_acf_flexible
+	url = https://github.com/WordPressUtilities/wpu_acf_flexible.git

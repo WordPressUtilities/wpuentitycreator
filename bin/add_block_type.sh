@@ -7,8 +7,18 @@
 ## Block Model
 ###################################
 
+_block_model_name="";
+if [[ -f "${SOURCEDIR}tools/wpu_acf_flexible/blocks/${entity_id}/model.php" ]];then
+    _block_model_name_test=$(bashutilities_get_yn "The model '${entity_id}' exists, do you want to use it?" 'y');
+    if [[ "${_block_model_name_test}" == 'y' ]];then
+        _block_model_name="${entity_id}";
+    fi;
+fi;
+
 # Ask type
-_block_model_name=$(bashutilities_get_user_var "Is it a block model? Type the ID here to specify it" '');
+if [[ "${_block_model_name}" == "" ]];then
+    _block_model_name=$(bashutilities_get_user_var "Is it a block model? Type the ID here to specify it" '');
+fi;
 if [[ "${_block_model_name}" != '' ]];then
     cat "${SOURCEDIR}tpl/blocks/0-header.txt" >> "${mainfile}";
     cat "${SOURCEDIR}tpl/blocks/0-wpuacfmodel.txt" >> "${mainfile}";
