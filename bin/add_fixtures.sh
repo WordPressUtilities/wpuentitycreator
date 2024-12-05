@@ -4,7 +4,7 @@
 ## Add fixtures
 ###################################
 
-read -p "Add fixtures ? (y/N) " add_fixtures;
+add_fixtures=$(bashutilities_get_yn "Add fixtures ?" 'n');
 if [[ "${add_fixtures}" == 'y' ]]; then
     _fixtures_dir="${wpcontent_dir}/fixtures";
     _fixtures_file="${_fixtures_dir}/${entity_pluralid}.csv";

@@ -27,7 +27,7 @@ fi;
 # Use temporary prefix
 use_tmp_prefix='n';
 if [[ "${tmp_prefix}" != '' ]];then
-    read -p "Use '${tmp_prefix}' as the project prefix [Y/n] : " use_tmp_prefix;
+    use_tmp_prefix=$(bashutilities_get_yn "Use '${tmp_prefix}' as the project prefix ?" 'y');
     if [[ $use_tmp_prefix != 'n' ]]; then
         project_prefix="${tmp_prefix}";
     fi;

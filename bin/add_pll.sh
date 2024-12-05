@@ -4,7 +4,7 @@
 ## Add post type to Polylang
 ###################################
 
-read -p "Add post type to Polylang ? (y/N) " add_pll;
+add_pll=$(bashutilities_get_yn "Add post type to Polylang ?" 'n');
 if [[ $add_pll == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_pll.php" >> "${mainfile}";
 fi;

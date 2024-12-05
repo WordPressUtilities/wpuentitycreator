@@ -4,7 +4,7 @@
 ## Register taxonomy
 ###################################
 
-read -p "Add taxonomy metas ? (y/N) " add_taxometas;
+add_taxometas=$(bashutilities_get_yn "Add taxonomy metas ?" 'n');
 if [[ $add_taxometas == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_taxometas_tax.php" >> "${mainfile}";
 fi;

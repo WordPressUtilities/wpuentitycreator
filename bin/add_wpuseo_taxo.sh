@@ -4,7 +4,7 @@
 ## Add taxo to WPU SEO
 ###################################
 
-read -p "Add taxo to WPU SEO ? (y/N) " add_wpuseo_taxo;
+add_wpuseo_taxo=$(bashutilities_get_yn "Add taxo to WPU SEO ?" 'n');
 if [[ $add_wpuseo_taxo == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_wpuseo_taxo.php" >> "${mainfile}";
 fi;

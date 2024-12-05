@@ -4,7 +4,7 @@
 ## Add a widget
 ###################################
 
-read -p "Add a widget ? (y/N) " add_widget;
+add_widget=$(bashutilities_get_yn "Add a widget ?" 'n');
 if [[ $add_widget == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_widget.php" >> "${mainfile}";
 fi;

@@ -7,7 +7,7 @@
 page_tpl_file="${theme_dir}/page-${entity_id}.php";
 
 if [ -d ${theme_dir} ];then
-    read -p "Create page template ? (Y/n) " create_page;
+    create_page=$(bashutilities_get_yn "Create page template ?" 'y');
     if [[ $create_page != 'n' ]]; then
         cp "${SOURCEDIR}tpl/default-page.php" "${page_tpl_file}";
         if [[ $add_strates == 'y' ]]; then

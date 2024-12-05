@@ -6,7 +6,7 @@
 
 if [ -d ${theme_dir} ];then
     if [[ $prevent_single != 'y' ]]; then
-        read -p "Create singular template ? (Y/n) " create_entity_singular;
+        create_entity_singular=$(bashutilities_get_yn "- Create singular template ?", 'y');
         if [[ $create_entity_singular != 'n' ]]; then
             page_tpl_file="${theme_dir}/single-${entity_pluralid}.php";
             cp "${SOURCEDIR}tpl/default-singular.php" "${page_tpl_file}";
@@ -20,14 +20,14 @@ if [ -d ${theme_dir} ];then
         fi;
     fi;
     if [[ $prevent_archive != 'y' ]]; then
-        read -p "Create archive template ? (Y/n) " create_entity_plural;
+        create_entity_plural=$(bashutilities_get_yn "- Create archive template ?", 'y');
         if [[ $create_entity_plural != 'n' ]]; then
             page_tpl_file="${theme_dir}/archive-${entity_pluralid}.php";
             cp "${SOURCEDIR}tpl/default-archive.php" "${page_tpl_file}";
             wpuentitycreator_replace_vars "${page_tpl_file}";
         fi;
     fi;
-    read -p "Create loop template ? (Y/n) " create_loop_template;
+    create_loop_template=$(bashutilities_get_yn "- Create loop template ?", 'y');
     if [[ $create_loop_template != 'n' ]]; then
         page_tpl_file="${theme_dir}/tpl/loops/loop-${entity_pluralid}.php";
         if [[ ! -d "${theme_dir}/tpl" ]];then
@@ -41,7 +41,7 @@ if [ -d ${theme_dir} ];then
         wpuentitycreator_replace_vars "${page_tpl_file}";
     fi;
     if [[ $register_taxonomy == 'y' ]]; then
-        read -p "Create taxo template ? (Y/n) " create_entity_taxo;
+        create_entity_taxo=$(bashutilities_get_yn "- Create taxonomy template ?", 'y');
         if [[ $create_entity_taxo != 'n' ]]; then
             page_tpl_file="${theme_dir}/taxonomy-${entity_pluralid}-type.php";
             cp "${SOURCEDIR}tpl/default-tax-entity.php" "${page_tpl_file}";

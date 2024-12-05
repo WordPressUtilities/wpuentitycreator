@@ -4,7 +4,7 @@
 ## Add post type to WPU SEO
 ###################################
 
-read -p "Add post type to WPU SEO ? (y/N) " add_wpuseo;
+add_wpuseo=$(bashutilities_get_yn "Add post type to WPU SEO ?" 'n');
 if [[ $add_wpuseo == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_wpuseo.php" >> "${mainfile}";
 fi;

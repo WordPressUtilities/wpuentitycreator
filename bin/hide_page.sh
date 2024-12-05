@@ -4,7 +4,7 @@
 ## Hide page in front
 ###################################
 
-read -p "Hide page ? (y/N) " hide_page;
+hide_page=$(bashutilities_get_yn "Hide page ?" 'n');
 if [[ $hide_page == 'y' ]]; then
     cat "${SOURCEDIR}inc/hide_page.php" >> "${mainfile}";
 fi;

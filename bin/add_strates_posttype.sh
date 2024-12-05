@@ -8,7 +8,7 @@ fi;
 ## Add strates
 ###################################
 
-read -p "Add strates ? (y/N) " add_strates;
+add_strates=$(bashutilities_get_yn "Add strates ?" 'n');
 if [[ $add_strates == 'y' ]]; then
     cat "${SOURCEDIR}inc/add_strates_posttype.php" >> "${mainfile}";
 fi;

@@ -7,7 +7,7 @@
 
 two_fields_more="n";
 
-read -p "Add post metas ? (Y/n) " add_post_metas;
+add_post_metas=$(bashutilities_get_yn "Add post metas ?" 'y');
 if [[ $add_post_metas != 'n' ]]; then
 
     cat "${SOURCEDIR}inc/add_post_metas_${entity_typename}.php" >> "${mainfile}";
