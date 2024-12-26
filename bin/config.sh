@@ -76,6 +76,13 @@ fi;
 entity_pluralid=$(bashutilities_string_to_slug "${entity_pluralid}");
 mainfile="${MAINDIR}${project_prefix}_${entity_pluralid}.php";
 
+if [[ -f "${mainfile}" ]];then
+    bashutilities_message "File already exists, it will be overriden: ${mainfile}" 'error';
+    _wpuentitycreator_overwrite=$(bashutilities_get_yn "Do you want to continue ?" 'n');
+    if [[ $_wpuentitycreator_overwrite == 'n' ]]; then
+        exit;
+    fi;
+fi;
 
 # Entity name
 a=`echo ${entity_id} | cut -c1 | tr [:lower:] [:upper:]`;

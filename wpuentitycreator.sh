@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.41.0';
+echo '#### v 0.42.0';
 echo '####';
 echo '';
 
@@ -172,6 +172,16 @@ if [[ $entity_type == 'p' ]]; then
     . "${SOURCEDIR}bin/add_strates_page.sh";
     . "${SOURCEDIR}bin/create_page.sh";
 fi;
+
+###################################
+## Open file in Visual Studio Code
+###################################
+
+if command -v ps >/dev/null 2>&1; then
+    if command -v code >/dev/null 2>&1 && ps aux | grep -q "[V]isual Studio"; then
+        code "${mainfile}";
+    fi
+fi
 
 . "${SOURCEDIR}bin/clean.sh";
 . "${_SOURCEDIR_BASHUTILITIES}/modules/stop.sh";
