@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Add';
-echo '#### v 0.42.0';
+echo '#### v 0.43.0';
 echo '####';
 echo '';
 
@@ -12,6 +12,7 @@ echo '';
 
 MAINDIR="${PWD}/";
 SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
+_SOURCEDIR_BASHUTILITIES="${SOURCEDIR}tools/BashUtilities/"
 
 if [[ ! -f "${1}" ]];then
     echo 'no valid file defined';
@@ -20,6 +21,13 @@ fi;
 
 _wpcontentdir=$(pwd);
 wpcontent_dir=$(echo "${_wpcontentdir%/mu-plugins*}");
+
+
+. "${_SOURCEDIR_BASHUTILITIES}/modules/files.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/messages.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/texttransform.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/values.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/git.sh";
 
 . "${SOURCEDIR}bin/functions.sh";
 . "${SOURCEDIR}bin/detect.sh";
@@ -33,16 +41,16 @@ project_prefix=$(basename "${mainfile}");
 project_prefix=${project_prefix%_*};
 
 # Check if post type
-_has_post_type=$(search_extract_file "\$post_types\[\'" "\'\] \= array(" "${mainfile}")
-_has_page=$(search_extract_file "\$pages_site\[\'" "__page_id\'\] = array(" "${mainfile}");
+_has_post_type=$(bashutilities_search_extract_file "\$post_types\[\'" "\'\] \= array(" "${mainfile}")
+_has_page=$(bashutilities_search_extract_file "\$pages_site\[\'" "__page_id\'\] = array(" "${mainfile}");
 
 if [[ "${_has_post_type}" ]];then
     entity_typename='entity';
     entity_type='c';
     entity_pluralid=${_has_post_type};
     entity_id=${_has_post_type};
-    entity_name=$(search_extract_file "'name' => __('" "', '${project_prefix}')," "${mainfile}")
-    entity_plural=$(search_extract_file "'plural' => __('" "', '${project_prefix}')," "${mainfile}")
+    entity_name=$(bashutilities_search_extract_file "'name' => __('" "', '${project_prefix}')," "${mainfile}")
+    entity_plural=$(bashutilities_search_extract_file "'plural' => __('" "', '${project_prefix}')," "${mainfile}")
 fi;
 
 if [[ "${_has_page}" ]];then
@@ -50,7 +58,7 @@ if [[ "${_has_page}" ]];then
     entity_type='p';
     entity_pluralid="${_has_page}";
     entity_id="${_has_page}";
-    entity_name=$(search_extract_file "'post_title' => '" "'," "${mainfile}");
+    entity_name=$(bashutilities_search_extract_file "'post_title' => '" "'," "${mainfile}");
     entity_plural="${entity_name}";
 fi;
 
@@ -78,3 +86,5 @@ if [[ $entity_type == 'c' ]]; then
 fi;
 
 
+. "${SOURCEDIR}bin/stop.sh";
+. "${_SOURCEDIR_BASHUTILITIES}/modules/stop.sh";

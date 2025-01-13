@@ -44,7 +44,7 @@ if [[ $add_post_metas != 'n' ]]; then
         f_tab="    ";
         f_nl="\/\*newline\*\/";
         field_content="${f_tab}\$fields['entityidentity_${field_id}'] = array(${f_nl}${f_tab}${f_tab}'box' => 'entityidentity_details',${f_nl}${f_tab}${f_tab}'name' => __('${field_name}', '${project_prefix}'),${f_nl}${f_tab}${f_tab}'type' => '${field_type}'${f_nl}${f_tab});${f_nl}#wputentitycreatorpostfields";
-        wpuentitycreator_sed "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
+        bashutilities_sed "s/#wputentitycreatorpostfields/${field_content}/g" "${mainfile}";
 
         if [[ "${two_fields_more}" == 'y' ]];then
             read -p "Add another meta field ? (Y/n) " field_new;
@@ -60,5 +60,5 @@ if [[ $add_post_metas != 'n' ]]; then
 
         two_fields_more='y';
     done
-    wpuentitycreator_sed "s/#wputentitycreatorpostfields//g" "${mainfile}";
+    bashutilities_sed "s/#wputentitycreatorpostfields//g" "${mainfile}";
 fi;

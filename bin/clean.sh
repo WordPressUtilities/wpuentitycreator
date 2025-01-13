@@ -6,26 +6,26 @@
 
 entity_id_up=`echo ${entity_id} | tr [:lower:] [:upper:]`;
 
-wpuentitycreator_sed "s/projectprefix/${project_prefix}/g" "${mainfile}";
-wpuentitycreator_sed "s/entityidentityup/${entity_id_up}/g" "${mainfile}";
-wpuentitycreator_sed "s/entityidentity/${entity_id}/g" "${mainfile}";
-wpuentitycreator_sed "s/entitynameentity/${entity_name}/g" "${mainfile}";
-wpuentitycreator_sed "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
-wpuentitycreator_sed "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
-wpuentitycreator_sed "s/taxposttype/${tax_post_type}/g" "${mainfile}";
+bashutilities_sed "s/projectprefix/${project_prefix}/g" "${mainfile}";
+bashutilities_sed "s/entityidentityup/${entity_id_up}/g" "${mainfile}";
+bashutilities_sed "s/entityidentity/${entity_id}/g" "${mainfile}";
+bashutilities_sed "s/entitynameentity/${entity_name}/g" "${mainfile}";
+bashutilities_sed "s/entitypluralid/${entity_pluralid}/g" "${mainfile}";
+bashutilities_sed "s/entitypluralentity/${entity_plural}/g" "${mainfile}";
+bashutilities_sed "s/taxposttype/${tax_post_type}/g" "${mainfile}";
 
 ###################################
 ## Delete false PHP openings
 ###################################
 
-wpuentitycreator_sed 's/\<\?php \/\* \*\///g' "${mainfile}";
-wpuentitycreator_sed 's/<?php \/\* \*\///g' "${mainfile}";
+bashutilities_sed 's/\<\?php \/\* \*\///g' "${mainfile}";
+bashutilities_sed 's/<?php \/\* \*\///g' "${mainfile}";
 
 ###################################
 ## Add newlines where needed
 ###################################
 
-wpuentitycreator_sed 's/\/\*newline\*\//\'$'\n/g' "${mainfile}";
+bashutilities_sed 's/\/\*newline\*\//\'$'\n/g' "${mainfile}";
 
 ###################################
 ## Clean up multiple line breaks

@@ -2,7 +2,7 @@
 
 echo '####';
 echo '#### WPU Entity Creator';
-echo '#### v 0.42.0';
+echo '#### v 0.43.0';
 echo '####';
 echo '';
 
@@ -184,4 +184,5 @@ if command -v ps >/dev/null 2>&1; then
 fi
 
 . "${SOURCEDIR}bin/clean.sh";
+. "${SOURCEDIR}bin/stop.sh";
 . "${_SOURCEDIR_BASHUTILITIES}/modules/stop.sh";

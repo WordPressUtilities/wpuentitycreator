@@ -4,7 +4,7 @@
 project_prefix='';
 tmp_prefix='';
 for _file in ./*_*.php; do
-    tmp_prefix=$(extract_prefix $_file);
+    tmp_prefix=$(wpuentitycreator_extract_prefix $_file);
     if [[ $tmp_prefix == '' ]]; then
         continue;
     fi;

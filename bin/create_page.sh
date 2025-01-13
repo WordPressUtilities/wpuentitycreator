@@ -11,10 +11,10 @@ if [ -d ${theme_dir} ];then
     if [[ $create_page != 'n' ]]; then
         cp "${SOURCEDIR}tpl/default-page.php" "${page_tpl_file}";
         if [[ $add_strates == 'y' ]]; then
-            wpuentitycreator_sed "s/the_content()/echo get_wpu_acf_flexible_content('entitypluralid-blocks')/g" "${page_tpl_file}";
+            bashutilities_sed "s/the_content()/echo get_wpu_acf_flexible_content('entitypluralid-blocks')/g" "${page_tpl_file}";
         fi;
         if [[ $add_contact_form == 'y' ]]; then
-            wpuentitycreator_sed "s/the_content()/the_content();do_action('wpucontactforms_content', false, 'entitypluralid-form')/g" "${page_tpl_file}";
+            bashutilities_sed "s/the_content()/the_content();do_action('wpucontactforms_content', false, 'entitypluralid-form')/g" "${page_tpl_file}";
         fi;
 
         wpuentitycreator_replace_vars "${page_tpl_file}";

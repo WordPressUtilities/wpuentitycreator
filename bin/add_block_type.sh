@@ -33,7 +33,7 @@ if [[ "${_block_model_name}" != '' ]];then
         cat "${SOURCEDIR}tpl/blocks/0-wpuacfmodel-overridefields.txt" >> "${mainfile}";
     fi;
 
-    wpuentitycreator_sed "s/wpuacfmodelid/${_block_model_name}/g" "${mainfile}";
+    bashutilities_sed "s/wpuacfmodelid/${_block_model_name}/g" "${mainfile}";
     return;
 fi;
 
