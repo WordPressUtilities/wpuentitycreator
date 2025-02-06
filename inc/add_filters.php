@@ -5,32 +5,20 @@
 ---------------------------------------------------------- */
 
 function projectprefix_entitypluralid_livesearch_get_datas() {
-    $wpq_items = new WP_Query(array(
-        'posts_per_page' => -1,
-        'post_type' => 'entitypluralid'
+    $q = wpulivesearch_get_query_for_post_type('entitypluralid', array(
+        // 'filter_taxonomy_pages' => array('entitypluralid-type')
     ));
+    $wpq_items = new WP_Query($q);
 
     $datas = array();
 
     while ($wpq_items->have_posts()) {
         $wpq_items->the_post();
 
-        /* HTML */
-        ob_start();
-        include get_stylesheet_directory() . '/tpl/loops/loop-entitypluralid.php';
-        $out = ob_get_clean();
-
-        /* Filter : type */
-        $t_types = get_the_terms(get_the_ID(), 'entitypluralid-type');
-        $types = array();
-        foreach ($t_types as $type) {
-            $types[] = $type->slug;
-        }
-
         /* Store data */
         $datas[] = array(
-            'html' => $out,
-            'type' => $types,
+            'html' => wpulivesearch_get_template_html(ns_get_template_directory() . '/tpl/loops/loop-entitypluralid.php'),
+            'type' => wpulivesearch_get_terms_for_post('entitypluralid-type'),
             'name' => get_the_title()
         );
     }
