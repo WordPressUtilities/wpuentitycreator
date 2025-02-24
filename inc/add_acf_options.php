@@ -24,14 +24,14 @@ add_filter('wpu_acf_flexible_content', function ($contents) {
     return $contents;
 }, 12, 1);
 
-add_action('plugins_loaded', function () {
+add_action('init', function () {
     if (!function_exists('acf_add_options_page')) {
         return;
     }
     acf_add_options_page(array(
-        'page_title' => 'entitypluralentity',
+        'page_title' => __('entitypluralentity', 'projectprefix'),
         'menu_slug' => 'projectprefix_entitypluralid',
-        'menu_title' => 'entitypluralentity',
+        'menu_title' => __('entitypluralentity', 'projectprefix'),
         'capability' => 'edit_posts',
         'position' => '50',
         'parent_slug' => '',
@@ -39,8 +39,8 @@ add_action('plugins_loaded', function () {
         'redirect' => true,
         'post_id' => 'projectprefix_entitypluralid',
         'autoload' => false,
-        'update_button' => 'Update',
-        'updated_message' => 'Options Updated'
+        'update_button' => __('Update', 'projectprefix'),
+        'updated_message' => __('Options Updated', 'projectprefix')
     ));
 });
 
