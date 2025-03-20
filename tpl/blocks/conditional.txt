@@ -1,9 +1,9 @@
 'type' => array(
-    'label' => 'Type',
+    'label' => __('Type','projectprefix'),
     'type' => 'select',
     'choices' => array(
-        'last_posts' => 'Last posts',
-        'manual_posts' => 'Manual posts',
+        'last_posts' => __('Last posts','projectprefix'),
+        'manual_posts' => __('Manual posts','projectprefix'),
     )
 ),
 'posts_last' => array(

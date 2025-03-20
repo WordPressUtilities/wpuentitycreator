@@ -2,5 +2,5 @@
 add_filter('projectprefix_blocks', function ($layouts) {
     $layouts['entityidentity'] = array(
         'key' => 'entityidentity_layout',
-        'label' => 'entitynameentity',
+        'label' => __('entitynameentity','projectprefix'),
         'sub_fields' => array(

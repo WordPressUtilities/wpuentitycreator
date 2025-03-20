@@ -2,7 +2,7 @@
 add_filter('projectprefix_blocks', function ($layouts) {
     $layouts['entityidentity'] = array(
         'key' => 'entityidentity',
-        'label' => 'entitynameentity',
+        'label' => __('entitynameentity','projectprefix'),
         'wpuacf_model' => 'wpuacfmodelid'
     );
     return $layouts;

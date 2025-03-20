@@ -2,13 +2,10 @@
                 'required' => true,
                 'min' => 1,
                 'type' => 'repeater',
-                'label' => 'entitynameentity',
+                'label' => __('entitynameentity','projectprefix'),
                 'layout' => 'block',
                 'sub_fields' => array(
                     'title' => 'wpuacf_title',
-                    'text' => array(
-                        'label' => 'Text',
-                        'type' => 'textarea'
-                    )
+                    'text' => 'wpuacf_text'
                 )
             ),
