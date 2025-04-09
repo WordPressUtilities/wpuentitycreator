@@ -17,7 +17,7 @@ function projectprefix_entitypluralid_livesearch_get_datas() {
 
         /* Store data */
         $datas[] = array(
-            'html' => wpulivesearch_get_template_html(ns_get_template_directory() . '/tpl/loops/loop-entitypluralid.php'),
+            'html' => wpulivesearch_get_template_html(get_stylesheet_directory() . '/tpl/loops/loop-entitypluralid.php'),
             'type' => wpulivesearch_get_terms_for_post('entitypluralid-type'),
             'name' => get_the_title()
         );
