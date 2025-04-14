@@ -19,3 +19,7 @@ else
     fi;
 fi;
 
+# Set active post type in menu
+if [[ $prevent_single == 'n' && $prevent_archive == 'n' ]]; then
+    cat "${SOURCEDIR}inc/add_post_type_active_menu.php" >> "${mainfile}";
+fi;
