@@ -10,6 +10,10 @@ function projectprefix_entitypluralid_livesearch_get_datas() {
     ));
     $wpq_items = new WP_Query($q);
 
+    /* Preload thumbnails */
+    $post_ids = wp_list_pluck($wpq_items->posts, 'ID');
+    wpulivesearch_preload_thumbnail_cache($post_ids);
+
     $datas = array();
 
     while ($wpq_items->have_posts()) {
