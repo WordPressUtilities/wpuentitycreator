@@ -11,6 +11,8 @@ function projectprefix_entitypluralid_set_posttypes($post_types) {
         'name' => __('entitynameentity', 'projectprefix') ,
         'plural' => __('entitypluralentity', 'projectprefix') ,
         'female' => 0,
+        'wputh__hide_singular' => wpuentitycreator_hide_singular,
+        'has_archive' => wpuentitycreator_has_archive,
         'supports' => array(
             'title',
             'editor',
