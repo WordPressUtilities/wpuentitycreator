@@ -37,6 +37,16 @@ if [[ "${_block_model_name}" != '' ]];then
     return;
 fi;
 
+## Extra content
+###################################
+
+_block_extra_content_before="";
+_block_extra_content_after="";
+if command -v wp >/dev/null 2>&1; then
+    _block_extra_content_before=$(wp eval 'echo apply_filters("wpuentitycreator__block__extrafields_before","");');
+    _block_extra_content_after=$(wp eval 'echo apply_filters("wpuentitycreator__block__extrafields_after","");');
+fi
+
 ## Default type
 ###################################
 
@@ -50,8 +60,12 @@ while [ -z $add_block_type ]; do
 
     # Add Header
     cat "${SOURCEDIR}tpl/blocks/0-header.txt" >> "${mainfile}";
+
     # Add Before
     cat "${SOURCEDIR}tpl/blocks/0-before.txt" >> "${mainfile}";
+
+    # Insert extra content
+    echo "${_block_extra_content_before}" >> "${mainfile}";
 
     # Type CTA-Title
     if [[ $add_block_type == 'c' || $add_block_type == 'ctatitle' ]]; then
@@ -146,6 +160,9 @@ while [ -z $add_block_type ]; do
 
     fi;
     # Type Empty : no content needed
+
+    # Insert extra content
+    echo "${_block_extra_content_after}" >> "${mainfile}";
 
     # Add after
     cat "${SOURCEDIR}tpl/blocks/0-after.txt" >> "${mainfile}";
