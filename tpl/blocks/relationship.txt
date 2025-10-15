@@ -3,4 +3,4 @@
                 'label' => __('entitynameentity','projectprefix'),
                 'type' => 'relationship',
                 'post_type' => 'post'
-            )
+            ),

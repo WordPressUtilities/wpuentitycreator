@@ -4,4 +4,4 @@
                 'render' => function ($field) {
                     echo '<p>Click on “apply” to preview this block.</p>';
                 }
-            )
+            ),
