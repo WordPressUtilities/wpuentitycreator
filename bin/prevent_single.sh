@@ -14,9 +14,9 @@ else
 fi;
 
 if [[ $prevent_archive == 'y' ]]; then
-    bashutilities_sed "s/wpuentitycreator_has_archive/1/g" "${mainfile}";
-else
     bashutilities_sed "s/wpuentitycreator_has_archive/0/g" "${mainfile}";
+else
+    bashutilities_sed "s/wpuentitycreator_has_archive/1/g" "${mainfile}";
 fi;
 
 # Set active post type in menu
